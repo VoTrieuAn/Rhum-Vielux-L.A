@@ -4,31 +4,31 @@ import { FaLongArrowAltRight } from "react-icons/fa";
 const BannerAbout = () => {
   return (
     <>
-      <section className="bg-background p-15">
-        <div className="container mx-auto xl:px-6">
-          <div className="flex gap-5">
-            <div className="w-[50%]">
-              <div className="relative z-10 w-[578px] overflow-hidden">
-                <img
-                  src="/banner/rhum-people-banner.jpg"
-                  alt=""
-                  className="h-full w-full object-contain"
-                />
-              </div>
+      <section className="bg-background px-4.5 py-10 sm:px-6 xl:py-15">
+        <div className="container mx-auto">
+          <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
+            <div className="h-auto w-full overflow-hidden rounded-2xl">
+              <img
+                src="/banner/rhum-people-banner.jpg"
+                alt=""
+                className="h-full w-full object-cover"
+              />
             </div>
-            <div className="flex w-[50%] flex-col">
+            <div className="flex h-full flex-col">
               <div className="mb-2 flex items-center gap-3">
-                <div className="font-bonheur text-9xl font-normal">G</div>
+                <div className="font-bonheur text-8xl font-normal sm:text-[112px] lg:text-9xl">
+                  G
+                </div>
                 <div className="">
-                  <div className="font-bonheur text-[64px] leading-[100%]">
+                  <div className="font-bonheur text-5xl leading-[100%] sm:text-[56px] lg:text-[64px]">
                     iới thiệu về
                   </div>
-                  <div className="font-bellota ml-6.5 text-5xl font-[700]">
+                  <div className="font-bellota text-4xl font-[700] sm:ml-5 sm:text-[42px] lg:ml-6.5 lg:text-5xl">
                     Rhum Long An
                   </div>
                 </div>
               </div>
-              <p className="mb-6.5 flex-1 text-justify text-[20px] leading-[36px] font-normal">
+              <p className="mb-6.5 flex-1 text-justify leading-[36px] font-normal sm:text-[16px] lg:text-[20px]">
                 Rượu Rhum Long An không chỉ là một thức uống, mà còn là hành
                 trình trải nghiệm. Được làm từ những cây mía tươi ngon nhất,
                 trải qua quy trình sản xuất chuyên nghiệp với kỹ thuật chưng cất
@@ -38,7 +38,7 @@ const BannerAbout = () => {
                 tinh tâm huyết và kinh nghiệm của những người thợ lành nghề, tạo
                 nên hương vị đặc trưng, khó quên.
               </p>
-              <div className="inline-flex">
+              <div className="block lg:inline-flex">
                 <Link
                   to="/products"
                   className="bg-primary hover:text-primary hover:bg-primary/50 flex items-center justify-center gap-1.5 rounded-[46px] px-7 py-3 font-bold text-white transition-colors duration-300"

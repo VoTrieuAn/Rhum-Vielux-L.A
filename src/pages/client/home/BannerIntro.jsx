@@ -3,17 +3,17 @@ import { Link } from "react-router-dom";
 const BannerIntro = () => {
   return (
     <>
-      <section className="bg-surface relative mt-[-92px] pt-[152px] pb-15">
-        <div className="relative z-1 container mx-auto xl:px-6">
-          <div className="flex items-center gap-10">
-            <div className="w-[50%]">
-              <h3 className="text-secondary mb-[30px] text-2xl font-normal tracking-[10px] uppercase">
+      <section className="bg-surface relative mt-[-68px] overflow-hidden px-4.5 py-10 pt-[108px] sm:mt-[-92px] sm:px-6 sm:pt-[152px] xl:pb-15">
+        <div className="relative z-10 container mx-auto">
+          <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
+            <div>
+              <h3 className="text-secondary mb-[15px] text-[16px] font-normal tracking-[10px] uppercase sm:text-[18px] lg:mb-[30px] lg:text-[22px] xl:text-2xl">
                 TRUYỀN THỐNG LÀM RƯỢU RHUM
               </h3>
-              <h2 className="text-primary text-[92px] leading-[120px] font-normal">
+              <h1 className="text-primary mb-[15px] text-5xl leading-16 font-normal sm:mb-1 sm:text-[52px] sm:leading-normal lg:text-[72px] xl:text-[92px]">
                 RƯỢU RHUM LONG AN
-              </h2>
-              <p className="mb-11.5 text-justify text-[20px] leading-10 font-normal">
+              </h1>
+              <p className="mb-10 text-justify text-[16px] leading-8 font-normal sm:mb-11.5 sm:text-[20px] sm:leading-10">
                 Rượu Rhum từ Long An – tinh hoa văn hóa, kết tinh từ bàn tay
                 khéo léo và bí quyết gia truyền. Mỗi giọt rượu mang trong mình
                 hương vị độc đáo, đánh thức mọi giác quan và lưu giữ trọn vẹn
@@ -21,39 +21,17 @@ const BannerIntro = () => {
               </p>
               <Link
                 to={"/about"}
-                className="hover:bg-primary border-y px-[92px] py-4.5 text-2xl font-normal transition-colors duration-300 hover:text-white"
+                className="hover:bg-primary inline-block w-full border-y px-[92px] py-3 text-center text-[20px] font-normal text-nowrap transition-colors duration-300 hover:text-white lg:py-4.5 lg:text-2xl"
               >
                 XEM CÁCH LÀM
               </Link>
             </div>
-            <div className="w-[50%]">
-              <div className="relative">
-                <div className="relative z-10 h-[695px] overflow-hidden">
-                  <img
-                    src="/banner/rhum-item-banner.png"
-                    alt=""
-                    className="h-full w-full object-contain"
-                  />
-                </div>
+            <div className="relative">
+              <div className="relative z-10 h-auto w-full overflow-hidden">
                 <img
-                  src="/banner/bird-banner.png"
+                  src="/banner/banner-main.png"
                   alt=""
-                  className="absolute top-[-50px] left-[10%] z-1 h-[318px]"
-                />
-                <img
-                  src="/banner/flower-banner.png"
-                  alt=""
-                  className="absolute top-[-22px] z-1 h-[564px]"
-                />
-                <img
-                  src="/banner/sugarcane-bush-banner.png"
-                  alt=""
-                  className="absolute top-0 left-[40%] z-1 h-[592px]"
-                />
-                <img
-                  src="/banner/sugarcane-banner.png"
-                  alt=""
-                  className="absolute top-[60%] left-[10%] z-1 h-[340px]"
+                  className="h-full w-full object-contain"
                 />
               </div>
             </div>
