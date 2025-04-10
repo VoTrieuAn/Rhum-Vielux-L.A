@@ -1,8 +1,12 @@
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { IoIosSearch } from "react-icons/io";
 import { FiUser } from "react-icons/fi";
+import { MENU_CLIENT } from "@libs/containt";
+import { Link, useLocation } from "react-router-dom";
 
 const Header = () => {
+  const { pathname } = useLocation();
+
   return (
     <header className="py-7">
       <div className="container mx-auto xl:px-6">
@@ -16,10 +20,16 @@ const Header = () => {
           </div>
           <nav className="flex-1">
             <ul className="flex items-center justify-center gap-11">
-              <li className="text-primary font-bold">Trang Chủ</li>
-              <li className="text-primary/60 font-bold">Giới Thiệu</li>
-              <li className="text-primary/60 font-bold">Sản Phẩm</li>
-              <li className="text-primary/60 font-bold">Liên Hệ</li>
+              {MENU_CLIENT.map((item) => (
+                <li className="text-[16px]">
+                  <Link
+                    to={item.path}
+                    className={`transition-colors duration-300 ${item.path === pathname ? "text-primary" : "text-primary/60 hover:text-primary"} font-bold`}
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </nav>
           <div className="flex h-11 items-center gap-3.5">
