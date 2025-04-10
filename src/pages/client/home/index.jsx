@@ -1,9 +1,11 @@
-import Banner from "./Banner";
+import BannerAbout from "./BannerAbout";
+import BannerIntro from "./BannerIntro";
 
 const HomePage = () => {
   return (
     <>
-      <Banner />
+      <BannerIntro />
+      <BannerAbout />
     </>
   );
 };

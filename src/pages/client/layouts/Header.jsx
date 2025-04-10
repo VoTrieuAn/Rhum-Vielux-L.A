@@ -8,7 +8,9 @@ const Header = () => {
   const { pathname } = useLocation();
 
   return (
-    <header className="py-7">
+    <header
+      className={`sticky top-0 left-0 z-[999] stroke-current py-4 shadow-sm ${pathname === "/" ? "bg-surface" : "bg-white"}`}
+    >
       <div className="container mx-auto xl:px-6">
         <div className="flex items-center justify-between">
           <div className="h-[60px] overflow-hidden">

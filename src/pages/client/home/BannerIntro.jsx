@@ -1,8 +1,10 @@
-const Banner = () => {
+import { Link } from "react-router-dom";
+
+const BannerIntro = () => {
   return (
     <>
-      <section className="bg-surface mt-[-116px] pt-[176px] pb-15">
-        <div className="container mx-auto xl:px-6">
+      <section className="bg-surface relative mt-[-92px] pt-[152px] pb-15">
+        <div className="relative z-1 container mx-auto xl:px-6">
           <div className="flex items-center gap-10">
             <div className="w-[50%]">
               <h3 className="text-secondary mb-[30px] text-2xl font-normal tracking-[10px] uppercase">
@@ -17,9 +19,12 @@ const Banner = () => {
                 hương vị độc đáo, đánh thức mọi giác quan và lưu giữ trọn vẹn
                 tinh thần Việt.
               </p>
-              <button className="hover:bg-primary border-y px-[92px] py-4.5 text-2xl font-normal hover:text-white">
+              <Link
+                to={"/about"}
+                className="hover:bg-primary border-y px-[92px] py-4.5 text-2xl font-normal transition-colors duration-300 hover:text-white"
+              >
                 XEM CÁCH LÀM
-              </button>
+              </Link>
             </div>
             <div className="w-[50%]">
               <div className="relative">
@@ -50,13 +55,17 @@ const Banner = () => {
                   alt=""
                   className="absolute top-[60%] left-[10%] z-1 h-[340px]"
                 />
-                <div className="absolute top-[25%] left-[18%] z-0 h-[400px] w-[400px] rounded-full bg-[#D1B991]"></div>
               </div>
             </div>
           </div>
         </div>
+        <img
+          src="/banner/village-banner.png"
+          alt=""
+          className="absolute bottom-0 left-0 z-[0] object-cover"
+        />
       </section>
     </>
   );
 };
-export default Banner;
+export default BannerIntro;
