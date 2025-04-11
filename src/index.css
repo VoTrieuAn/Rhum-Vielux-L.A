@@ -20,6 +20,16 @@
   --font-bellota: "Bellota", cursive;
 }
 
-body {
-  font-family: "Be Vietnam Pro", sans-serif;
+@layer utilities {
+  body {
+    font-family: "Be Vietnam Pro", sans-serif;
+  }
+
+  .swiper-pagination-bullet {
+    background-color: #482817 !important;
+  }
+
+  .swiper-pagination-bullet-active {
+    background-color: #482817 !important;
+  }
 }

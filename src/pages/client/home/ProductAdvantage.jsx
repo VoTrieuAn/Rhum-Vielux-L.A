@@ -12,7 +12,10 @@ const ProductAdvantage = () => {
           <Title name="Ưu Điểm Sản Phẩm" button={false} />
           <div className="mt-10 mb-5 grid grid-cols-1 gap-3 md:grid-cols-3 lg:gap-5">
             {ADVANTAGE_ITEMS.map((item) => (
-              <div className="bg-surface flex flex-col items-center gap-15 py-10 lg:py-15">
+              <div
+                key={item.id}
+                className="bg-surface flex flex-col items-center gap-15 py-10 lg:py-15"
+              >
                 <div className="h-auto w-15 overflow-hidden lg:w-20">
                   <img
                     src={item.image}

@@ -12,8 +12,9 @@ const Header = () => {
       className={`sticky top-0 left-0 z-[999] stroke-current p-3 px-4.5 shadow-sm sm:px-6 sm:py-4 ${pathname === "/" ? "bg-surface" : "bg-white"}`}
     >
       <div className="container mx-auto">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-3">
           <CiMenuBurger className="hover:text-secondary text-primary block cursor-pointer text-[32px] transition-colors duration-300 sm:text-[35px] lg:hidden" />
+          {/* Sẽ code lại logo riêng và chữ riêng */}
           <Link to={"/"} className="h-11 overflow-hidden sm:h-15">
             <img
               src="/logo-rhum-la.png"
@@ -21,8 +22,8 @@ const Header = () => {
               className="h-full w-full object-cover"
             />
           </Link>
-          <nav className="hidden flex-1 lg:inline-block">
-            <ul className="flex items-center justify-center gap-11">
+          <nav className="hidden flex-2 lg:inline-block">
+            <ul className="flex items-center justify-center lg:gap-6 xl:gap-11">
               {MENU_CLIENT.map((item) => (
                 <li key={item.path} className="text-[16px]">
                   <Link
@@ -35,7 +36,8 @@ const Header = () => {
               ))}
             </ul>
           </nav>
-          <div className="flex h-11 items-center gap-3.5">
+
+          <div className="flex h-11 items-center justify-end gap-3.5 lg:flex-1">
             <div className="hidden h-full w-[280px] items-center gap-3 rounded-[46px] bg-[#F3F3F3] px-4 py-3 lg:flex">
               <IoIosSearch className="text-[20px] text-[#667479]" />
               <input
