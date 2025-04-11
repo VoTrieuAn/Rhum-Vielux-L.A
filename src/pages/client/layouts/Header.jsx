@@ -24,7 +24,7 @@ const Header = () => {
           <nav className="hidden flex-1 lg:inline-block">
             <ul className="flex items-center justify-center gap-11">
               {MENU_CLIENT.map((item) => (
-                <li className="text-[16px]">
+                <li key={item.path} className="text-[16px]">
                   <Link
                     to={item.path}
                     className={`transition-colors duration-300 ${item.path === pathname ? "text-primary" : "text-primary/60 hover:text-primary"} font-bold`}
