@@ -2,7 +2,7 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 import { IoIosSearch } from "react-icons/io";
 import { FiUser } from "react-icons/fi";
 import { CiMenuBurger } from "react-icons/ci";
-import { MENU_CLIENT } from "@libs/containt";
+import { MENU_CLIENT } from "@libs/constant";
 import { Link, useLocation } from "react-router-dom";
 const Header = () => {
   const { pathname } = useLocation();

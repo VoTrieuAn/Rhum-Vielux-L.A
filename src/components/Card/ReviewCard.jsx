@@ -1,19 +1,21 @@
 import { FaStar } from "react-icons/fa";
 
 const ReviewCard = ({ data, mobile = false }) => {
-  const className = mobile ? "min-h-[424px]" : "";
+  const className = mobile
+    ? "min-h-[424px] sm:min-h-[300px]"
+    : "transition-transform duration-300 hover:scale-105";
   return (
     <>
       <div
         key={data.id}
-        className={`bg-surface relative z-0 flex cursor-pointer flex-col gap-5.5 p-[15px] text-[15px] transition-transform duration-300 hover:scale-105 hover:shadow-lg lg:text-[16px] ${className}`}
+        className={`bg-surface relative z-0 flex cursor-pointer flex-col gap-5.5 p-[15px] text-[14px] hover:shadow-lg lg:text-[16px] ${className}`}
       >
-        <div className="border-secondary flex items-center gap-5.5 border-b-1 pb-7.5">
-          <div className="h-auto w-25 overflow-hidden rounded-full">
+        <div className="border-secondary flex items-center gap-2 border-b-1 pb-7.5 lg:gap-5.5">
+          <div className="h-auto w-20 overflow-hidden rounded-full lg:w-25">
             <img src={data.image} alt={data.name} className="" />
           </div>
-          <div className="flex flex-col gap-3.5">
-            <p className="text-primary line-clamp-1 text-[18px] font-normal lg:text-2xl">
+          <div className="flex flex-col gap-2 lg:gap-3.5">
+            <p className="text-primary line-clamp-1 text-[16px] font-normal lg:text-2xl lg:text-[18px]">
               {data.name}
             </p>
             <p className="text-secondary font-normal">Khách hàng</p>

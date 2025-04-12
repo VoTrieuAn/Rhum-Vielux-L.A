@@ -1,5 +1,5 @@
 import Title from "@components/Title/Title";
-import { ADVANTAGE_ITEMS } from "@libs/containt";
+import { ADVANTAGE_ITEMS } from "@libs/constant";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -14,12 +14,12 @@ const ProductAdvantage = () => {
             {ADVANTAGE_ITEMS.map((item) => (
               <div
                 key={item.id}
-                className="bg-surface flex flex-col items-center gap-15 py-10 lg:py-15"
+                className="bg-surface flex flex-col items-center gap-10 py-10 sm:gap-15 lg:py-15"
               >
                 <div className="h-auto w-15 overflow-hidden lg:w-20">
                   <img
                     src={item.image}
-                    alt="item.title"
+                    alt={item.title}
                     className="h-full w-full object-cover"
                   />
                 </div>

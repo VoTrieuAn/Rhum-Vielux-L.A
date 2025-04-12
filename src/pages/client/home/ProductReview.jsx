@@ -1,6 +1,5 @@
 import Title from "@components/Title/Title";
-import { REVIEW_ITEMS } from "@libs/containt";
-import { FaStar } from "react-icons/fa";
+import { REVIEW_ITEMS } from "@libs/constant";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 
@@ -18,16 +17,16 @@ const ProductReview = () => {
             button={false}
           />
           {/* PC */}
-          <div className="mt-10 mb-5 hidden grid-cols-1 gap-3 md:grid-cols-3 lg:grid lg:gap-5">
+          <div className="mt-10 mb-5 hidden grid-cols-1 gap-3 md:grid md:grid-cols-3 lg:gap-5">
             {REVIEW_ITEMS.map((item) => (
-              <ReviewCard data={item} />
+              <ReviewCard key={item.id} data={item} />
             ))}
           </div>
           {/* Mobile */}
-          <div className="mt-10 block lg:hidden">
+          <div className="mt-10 block md:hidden">
             <Swiper
               pagination={{
-                dynamicBullets: true,
+                dynamicBullets: false,
               }}
               modules={[Pagination]}
               className="mySwiper"

@@ -64,3 +64,26 @@ export const REVIEW_ITEMS = [
       "Uống một ngụm mà cứ ngỡ đang lạc vào một hầm rượu cổ kính, nơi hương mía hòa quyện cùng gỗ sồi tạo nên một sự kết hợp hoàn hảo. Vừa êm, vừa sâu lắng, nhưng vẫn đủ mạnh để đánh thức mọi giác quan! 🍷🔥 Nếu bạn chưa thử, thì chắc chắn là đang bỏ lỡ một kiệt tác!",
   },
 ];
+
+export const LEGAL_ITEMS = [
+  {
+    id: 1,
+    image: "/legal/legal-1.png",
+    title: "Chấp Hành Điều 16 Của Luật Phòng Chống Tác Hại Của Rượu, Bia",
+    description:
+      "Website chấp hành Điều 16 của Luật Phòng, chống tác hại của rượu, bia số 44/2019/QH14 do Quốc Hội ban hành ngày 14 tháng 06 năm 2019 về Điều kiện bán rượu, bia theo hình thức thương mại điện tử Website chấp hành Nghị định số 24/2020/NĐ-CP quy định quy định chi tiết một số điều của Luật Phòng, chống tác hại của rượu, bia.",
+  },
+  {
+    id: 2,
+    image: "/legal/legal-2.png",
+    title: "Tuân Thủ Nghị Định",
+    description:
+      "Trang web này tuân thủ Nghị định số 185/2013/NĐ-CP của Chính phủ và luật quảng cáo số 16/2012/QH13 về kinh doanh bán hàng qua mạng.",
+  },
+  {
+    id: 3,
+    image: "/legal/legal-3.png",
+    title: "Không Bán Hàng Cho Người Dưới 18 Tuổi",
+    description: "Công ty chúng tôi không bán hàng cho người dưới 18 tuổi.",
+  },
+];

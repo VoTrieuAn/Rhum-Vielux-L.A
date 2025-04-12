@@ -6,6 +6,8 @@ import HomePage from "@pages/client/home";
 import ProductsPage from "@pages/client/products";
 import AboutPage from "@pages/client/about";
 import ContactPage from "@pages/client/contact";
+import SearchPage from "@pages/client/search";
+import ProductDetail from "@pages/client/products/[id]";
 
 const router = createBrowserRouter([
   {
@@ -20,12 +22,20 @@ const router = createBrowserRouter([
         element: <ProductsPage />,
       },
       {
+        path: "/products/:id",
+        element: <ProductDetail />,
+      },
+      {
         path: "/about",
         element: <AboutPage />,
       },
       {
         path: "/contact",
         element: <ContactPage />,
+      },
+      {
+        path: "/search",
+        element: <SearchPage />,
       },
     ],
   },

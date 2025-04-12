@@ -14,7 +14,7 @@
   --color-surface: #f5ebda;
   --color-error-100: #ffd6da;
   --color-error-200: #990d23;
-
+  --color-9e: #9e845c;
   --font-be: "Be Vietnam Pro", sans-serif;
   --font-bonheur: "Bonheur Royale", cursive;
   --font-bellota: "Bellota", cursive;
@@ -31,5 +31,29 @@
 
   .swiper-pagination-bullet-active {
     background-color: #482817 !important;
+  }
+
+  .pagination .swiper-pagination {
+    display: none !important;
+  }
+
+  .information p {
+    font-weight: bold;
+  }
+
+  .information p span {
+    font-weight: normal;
+  }
+
+  .security {
+    list-style-type: disc; /* Hiển thị dấu chấm tròn đen */
+    padding-left: 16px;
+  }
+  .security > li > a {
+    font-weight: bold;
+  }
+
+  .security > li:hover > a {
+    @apply text-error-200 transition-colors duration-300;
   }
 }
