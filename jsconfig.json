@@ -10,7 +10,8 @@
       "@context/*": ["src/context/*"],
       "@redux/*": ["src/redux/*"],
       "@services/*": ["src/services/*"],
-      "@config/*": ["src/config/*"]
+      "@config/*": ["src/config/*"],
+      "@routes/*": ["src/routes/*"],
     }
   }
 }
