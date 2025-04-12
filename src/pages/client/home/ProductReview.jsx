@@ -1,4 +1,4 @@
-import Title from "@components/Title/Title";
+import Title from "@components/Title";
 import { REVIEW_ITEMS } from "@libs/constant";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";

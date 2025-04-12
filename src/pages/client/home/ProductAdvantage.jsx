@@ -1,4 +1,4 @@
-import Title from "@components/Title/Title";
+import Title from "@components/Title";
 import { ADVANTAGE_ITEMS } from "@libs/constant";
 
 import "swiper/css";

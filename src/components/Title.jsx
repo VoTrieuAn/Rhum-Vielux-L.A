@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
-import Button from "@components/Button/Button";
+import Button from "@components/Button";
 
 const Title = ({ name, button = true }) => {
   return (

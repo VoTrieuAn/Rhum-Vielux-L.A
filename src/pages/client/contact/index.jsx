@@ -1,4 +1,11 @@
+import Seo from "@components/Seo";
+
 const ContactPage = () => {
-  return <div>ContactPage</div>;
+  return (
+    <>
+      <Seo title="Liên hệ" />
+      <div>ContactPage</div>
+    </>
+  );
 };
 export default ContactPage;

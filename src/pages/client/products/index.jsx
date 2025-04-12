@@ -1,4 +1,11 @@
+import Seo from "@components/Seo";
+
 const ProductsPage = () => {
-  return <div>ProductsPage</div>;
+  return (
+    <>
+      <Seo title="Sản phẩm" />
+      <div>ProductsPage</div>
+    </>
+  );
 };
 export default ProductsPage;

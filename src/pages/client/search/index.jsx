@@ -1,4 +1,11 @@
+import Seo from "@components/Seo";
+
 const SearchPage = () => {
-  return <div>SearchPage</div>;
+  return (
+    <>
+      <Seo title="Tìm kiếm" />
+      <div>SearchPage</div>
+    </>
+  );
 };
 export default SearchPage;

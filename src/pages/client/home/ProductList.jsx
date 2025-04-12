@@ -1,6 +1,6 @@
-import Button from "@components/Button/Button";
+import Button from "@components/Button";
 import ProductCard from "@components/Card/ProductCard";
-import Title from "@components/Title/Title";
+import Title from "@components/Title";
 import { Link } from "react-router-dom";
 
 const ProductList = () => {
