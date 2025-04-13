@@ -1,7 +1,6 @@
 import Button from "@components/Button";
 import ProductCard from "@components/Card/ProductCard";
 import Title from "@components/Title";
-import { Link } from "react-router-dom";
 
 const ProductList = () => {
   return (

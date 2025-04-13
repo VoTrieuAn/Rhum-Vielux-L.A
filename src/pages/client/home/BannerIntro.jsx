@@ -21,7 +21,7 @@ const BannerIntro = () => {
                 hương vị độc đáo, đánh thức mọi giác quan và lưu giữ trọn vẹn
                 tinh thần Việt."
               />
-              <BannerButton />
+              <BannerButton className="w-full px-[92px] md:w-fit" />
             </div>
             <div className="relative">
               <div className="relative z-10 h-auto w-full overflow-hidden">
