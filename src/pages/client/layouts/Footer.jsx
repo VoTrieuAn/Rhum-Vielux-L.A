@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <>
-      <footer className="bg-error-100 pagination p-normal">
+      <div className="bg-error-100 pagination p-normal">
         <div className="container">
           {/* Pc */}
           <div className="hidden grid-cols-1 gap-3 md:grid md:grid-cols-3 lg:gap-5">
@@ -69,7 +69,7 @@ const Footer = () => {
             </Swiper>
           </div>
         </div>
-      </footer>
+      </div>
       <footer className="bg-background px-4.5 py-10">
         <div className="container mx-auto">
           <div className="text-9e grid grid-cols-1 gap-3 text-[14px] md:grid-cols-3 lg:gap-5 lg:text-[16px]">

@@ -1,14 +1,12 @@
 import Button from "@components/Button";
 import ProductCard from "@components/Card/ProductCard";
-import Title from "@components/Title";
-import { Link } from "react-router-dom";
-
-const ProductList = () => {
+import Pagination from "@components/Pagination";
+const SearchProductList = () => {
   return (
     <>
-      <section className="xl:py-15">
+      <section className="p-normal">
         <div className="container mx-auto">
-          <div className="mt-10 mb-5 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4 lg:gap-5">
+          <div className="mb-5 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4 lg:gap-5">
             <ProductCard />
             <ProductCard />
             <ProductCard />
@@ -18,10 +16,10 @@ const ProductList = () => {
             <ProductCard />
             <ProductCard />
           </div>
-          <Button className="flex md:hidden" />
+          <Pagination />
         </div>
       </section>
     </>
   );
 };
-export default ProductList;
+export default SearchProductList;

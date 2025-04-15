@@ -4,7 +4,7 @@ const ProductCard = ({ name, origin, volume, alcohol, price }) => {
   return (
     <>
       <Link
-        to={"/"}
+        to={"/products/123"}
         className="rounded-[12px] p-2 shadow-lg transition duration-300 hover:scale-105"
       >
         <div className="h-auto w-full overflow-hidden rounded-[10px]">
