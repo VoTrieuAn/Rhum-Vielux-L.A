@@ -14,7 +14,11 @@
   --color-surface: #f5ebda;
   --color-error-100: #ffd6da;
   --color-error-200: #990d23;
+  --color-error-300: #c0392b;
+  --color-error-500: #e50000;
   --color-9e: #9e845c;
+  --color-dark: #667479;
+
   --font-be: "Be Vietnam Pro", sans-serif;
   --font-bonheur: "Bonheur Royale", cursive;
   --font-bellota: "Bellota", cursive;

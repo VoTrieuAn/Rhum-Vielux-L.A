@@ -117,3 +117,16 @@ export const FILTER_ITEMS = [
     ],
   },
 ];
+
+export const PRODUCT_DETAILS = [
+  { label: "Xuất xứ", value: "Việt Nam" },
+  { label: "Dung tích", value: "500 ml" },
+  { label: "Nồng độ", value: "≥ 26%" },
+];
+
+export const PACKAGE_PRODUCT = [
+  "1 chai",
+  "Thùng 6 chai",
+  "Thùng 12 chai",
+  "Thùng 20 chai",
+];

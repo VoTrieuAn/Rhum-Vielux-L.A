@@ -1,6 +1,5 @@
 import BannerButton from "@components/Banner/BannerButton";
 import BannerContent from "@components/Banner/BannerContent";
-import BannerSubTitle from "@components/Banner/BannerSubTitle";
 import BannerTitle from "@components/Banner/BannerTitle";
 
 const BannerIntro = () => {
