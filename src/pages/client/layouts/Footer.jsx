@@ -9,8 +9,8 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <>
-      <footer className="bg-error-100 pagination px-4.5 py-10">
-        <div className="container mx-auto">
+      <footer className="bg-error-100 pagination p-normal">
+        <div className="container">
           {/* Pc */}
           <div className="hidden grid-cols-1 gap-3 md:grid md:grid-cols-3 lg:gap-5">
             {LEGAL_ITEMS.map((item) => (

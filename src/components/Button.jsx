@@ -5,7 +5,7 @@ const Button = ({ className = "" }) => {
     <>
       <Link
         to={"/products"}
-        className={`border-primary hover:bg-primary items-center justify-center gap-2 rounded-3xl border px-7 py-3 text-[14px] font-medium transition-colors duration-300 hover:text-white ${className}`}
+        className={`border-primary hover:bg-primary transition-colors-300 items-center justify-center gap-2 rounded-3xl border px-7 py-3 text-[14px] font-medium hover:text-white ${className}`}
       >
         Xem thêm <IoIosArrowForward />
       </Link>

@@ -25,6 +25,25 @@
     font-family: "Be Vietnam Pro", sans-serif;
   }
 
+  .p-normal {
+    @apply px-4.5 py-10 sm:px-6 xl:py-15;
+  }
+  .container {
+    @apply container mx-auto;
+  }
+
+  .image-contain {
+    @apply h-full w-full object-contain;
+  }
+
+  .image-cover {
+    @apply h-full w-full object-cover;
+  }
+
+  .transition-colors-300 {
+    @apply transition-colors duration-300;
+  }
+
   .swiper-pagination-bullet {
     background-color: #482817 !important;
   }

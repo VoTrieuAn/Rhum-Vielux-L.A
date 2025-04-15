@@ -4,14 +4,14 @@ import { FaLongArrowAltRight } from "react-icons/fa";
 const BannerAbout = () => {
   return (
     <>
-      <section className="bg-background px-4.5 py-10 sm:px-6 xl:py-15">
-        <div className="container mx-auto">
+      <section className="bg-background p-normal">
+        <div className="container">
           <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
             <div className="h-auto w-full overflow-hidden rounded-2xl">
               <img
                 src="/banner/rhum-people-banner.jpg"
                 alt=""
-                className="h-full w-full object-cover"
+                className="image-cover"
               />
             </div>
             <div className="flex h-full flex-col">

@@ -11,7 +11,7 @@ const Header = () => {
     <header
       className={`sticky top-0 left-0 z-[999] stroke-current p-3 px-4.5 shadow-sm sm:px-6 sm:py-4 ${pathname === "/" ? "bg-surface" : "bg-white"}`}
     >
-      <div className="container mx-auto">
+      <div className="container">
         <div className="flex items-center justify-between gap-3">
           <CiMenuBurger className="hover:text-secondary text-primary block cursor-pointer text-[32px] transition-colors duration-300 sm:text-[35px] lg:hidden" />
           {/* Sẽ code lại logo riêng và chữ riêng */}
