@@ -7,8 +7,8 @@ import "swiper/css/pagination";
 const ProductAdvantage = () => {
   return (
     <>
-      <section className="bg-background px-4.5 py-10 sm:px-6 xl:py-15">
-        <div className="container mx-auto">
+      <section className="bg-background p-normal">
+        <div className="container">
           <Title name="Ưu Điểm Sản Phẩm" button={false} />
           <div className="mt-10 mb-5 grid grid-cols-1 gap-3 md:grid-cols-3 lg:gap-5">
             {ADVANTAGE_ITEMS.map((item) => (

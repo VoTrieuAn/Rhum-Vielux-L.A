@@ -10,8 +10,8 @@ import ReviewCard from "@components/Card/ReviewCard";
 const ProductReview = () => {
   return (
     <>
-      <section className="bg-background relative px-4.5 py-10 sm:px-6 xl:py-15">
-        <div className="relative z-10 container mx-auto">
+      <section className="bg-background p-normal relative">
+        <div className="relative z-10 container">
           <Title
             name="Cảm nhận của khách hàng về Rượu Rhum L.A"
             button={false}

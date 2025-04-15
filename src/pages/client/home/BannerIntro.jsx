@@ -6,8 +6,8 @@ import BannerTitle from "@components/Banner/BannerTitle";
 const BannerIntro = () => {
   return (
     <>
-      <section className="bg-surface relative mt-[-68px] overflow-hidden px-4.5 py-10 pt-[108px] sm:mt-[-92px] sm:px-6 sm:pt-[152px] xl:pb-15">
-        <div className="relative z-10 container mx-auto">
+      <section className="bg-surface p-normal relative mt-[-68px] overflow-hidden pt-[108px] sm:mt-[-92px] sm:pt-[152px]">
+        <div className="relative z-10 container">
           <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
             <div>
               <BannerSubTitle subTitle="TRUYỀN THỐNG LÀM RƯỢU RHUM" />
@@ -28,7 +28,7 @@ const BannerIntro = () => {
                 <img
                   src="/banner/banner-main.png"
                   alt=""
-                  className="h-full w-full object-contain"
+                  className="image-contain"
                 />
               </div>
             </div>

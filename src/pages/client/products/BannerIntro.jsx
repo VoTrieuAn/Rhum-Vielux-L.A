@@ -6,9 +6,9 @@ import BannerTitle from "@components/Banner/BannerTitle";
 const BannerIntro = () => {
   return (
     <>
-      <section className="relative px-4.5 py-10 sm:px-6">
-        <div className="container mx-auto">
-          <div className="bg-surface relative grid grid-cols-1 items-center rounded-[20px] px-15 py-7 md:grid-cols-2 md:flex-nowrap md:px-25 md:py-0">
+      <section className="p-normal relative">
+        <div className="container">
+          <div className="bg-surface relative grid grid-cols-1 items-center rounded-[20px] px-15 py-7 md:grid-cols-2 md:px-25 md:py-0">
             <div className="relative z-10">
               <BannerTitle
                 title="RƯỢU RHUM LONG AN"
@@ -22,7 +22,7 @@ const BannerIntro = () => {
                 <img
                   src="/banner/banner-main.png"
                   alt=""
-                  className="h-full w-full object-contain"
+                  className="image-contain"
                 />
               </div>
             </div>

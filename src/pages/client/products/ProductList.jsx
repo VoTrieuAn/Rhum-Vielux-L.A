@@ -6,8 +6,8 @@ import Pagination from "@components/Pagination";
 const ProductList = () => {
   return (
     <>
-      <section className="px-4.5 py-10 sm:px-6 xl:py-15">
-        <div className="container mx-auto">
+      <section className="p-normal">
+        <div className="container">
           <div className="flex gap-5">
             {/* Sidebar PC */}
             <div className="hidden md:block md:flex-1">

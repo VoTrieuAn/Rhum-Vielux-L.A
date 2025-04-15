@@ -8,11 +8,7 @@ const ProductCard = ({ name, origin, volume, alcohol, price }) => {
         className="rounded-[12px] p-2 shadow-lg transition duration-300 hover:scale-105"
       >
         <div className="h-auto w-full overflow-hidden rounded-[10px]">
-          <img
-            src="/rhum-item.jpg"
-            alt=""
-            className="h-full w-full object-cover"
-          />
+          <img src="/rhum-item.jpg" alt="" className="image-cover" />
         </div>
         <div className="p-2 text-[12px] sm:text-[16px]">
           <h3 className="text-primary line-clamp-1 font-bold uppercase">
