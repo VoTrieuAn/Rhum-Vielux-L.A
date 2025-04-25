@@ -3,10 +3,13 @@ import { IoIosSearch } from "react-icons/io";
 import { FiUser } from "react-icons/fi";
 import { CiMenuBurger } from "react-icons/ci";
 import { MENU_CLIENT } from "@libs/constant";
-import { Link, Navigate, useLocation } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { useRef } from "react";
 const Header = () => {
   const { pathname } = useLocation();
+  const ref = useRef("");
+  const navigate = useNavigate();
 
   if (pathname === "/about") {
     Swal.fire({
@@ -16,6 +19,17 @@ const Header = () => {
     });
     return <Navigate to={"/"} replace={true} />;
   }
+
+  const handleSearch = (e) => {
+    if (e.key === "Enter") {
+      const searchValue = ref.current.value;
+      navigate("/search", {
+        state: {
+          search: searchValue,
+        },
+      });
+    }
+  };
 
   return (
     <header
@@ -51,11 +65,13 @@ const Header = () => {
             <div className="hidden h-full w-[280px] items-center gap-3 rounded-[46px] bg-[#F3F3F3] px-4 py-3 lg:flex">
               <IoIosSearch className="text-[20px] text-[#667479]" />
               <input
+                ref={ref}
+                onKeyDown={handleSearch}
                 type="text"
                 name="search"
                 id="search"
                 placeholder="Nhập từ khóa..."
-                className="text-[14px] outline-none placeholder:font-[500]"
+                className="w-full text-[14px] outline-none placeholder:font-[500]"
               />
             </div>
             <div className="text-primary relative flex gap-3.5 text-[32px] sm:text-[35px]">

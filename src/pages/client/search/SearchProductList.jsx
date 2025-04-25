@@ -1,7 +1,13 @@
 import Button from "@components/Button";
 import ProductCard from "@components/Card/ProductCard";
 import Pagination from "@components/Pagination";
+import { useLocation } from "react-router-dom";
 const SearchProductList = () => {
+  const location = useLocation();
+  const searchValue = location?.state.search || "";
+
+  console.log(searchValue);
+
   return (
     <>
       <section className="p-normal">
