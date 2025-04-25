@@ -3,9 +3,19 @@ import { IoIosSearch } from "react-icons/io";
 import { FiUser } from "react-icons/fi";
 import { CiMenuBurger } from "react-icons/ci";
 import { MENU_CLIENT } from "@libs/constant";
-import { Link, useLocation } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
+import Swal from "sweetalert2";
 const Header = () => {
   const { pathname } = useLocation();
+
+  if (pathname === "/about") {
+    Swal.fire({
+      title: "Trang chưa sẵn sàng",
+      icon: "warning",
+      draggable: true,
+    });
+    return <Navigate to={"/"} replace={true} />;
+  }
 
   return (
     <header

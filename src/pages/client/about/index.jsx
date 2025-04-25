@@ -4,7 +4,7 @@ const AboutPage = () => {
   return (
     <>
       <Seo title="Giới thiệu" />
-      <div>AboutPage</div>
+      <div></div>
     </>
   );
 };

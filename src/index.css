@@ -79,4 +79,12 @@
   .security > li:hover > a {
     @apply text-error-200 transition-colors duration-300;
   }
+
+  button.swal2-confirm {
+    background-color: #3a1a15 !important;
+  }
+
+  button.swal2-confirm:focus {
+    box-shadow: none !important;
+  }
 }
