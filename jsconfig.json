@@ -12,6 +12,7 @@
       "@services/*": ["src/services/*"],
       "@config/*": ["src/config/*"],
       "@routes/*": ["src/routes/*"],
+      "@layouts/*": ["src/layouts/*"],
     }
   }
 }

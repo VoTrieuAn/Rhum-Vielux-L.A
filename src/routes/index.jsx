@@ -1,22 +1,16 @@
-import { createBrowserRouter } from "react-router-dom";
-import Layout from "@pages/client/layouts";
-import homeRoutes from "./home.routes";
-import aboutRoutes from "./about.routes";
-import productsRoutes from "./products.routes";
-import contactRoutes from "./contact.routes";
-import searchRoutes from "./search.routes";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import publicRoutes from "./PublicRoute";
+import privateRoutes from "./PrivateRoute";
+import PrivateRoute from "@components/PrivateRoute";
 
 const router = createBrowserRouter([
-  {
-    element: <Layout />,
-    children: [
-      ...homeRoutes,
-      ...aboutRoutes,
-      ...productsRoutes,
-      ...contactRoutes,
-      ...searchRoutes,
-    ],
-  },
+  ...publicRoutes,
+  ...privateRoutes.map((route) => ({
+    ...route,
+    element: <PrivateRoute>{route.element}</PrivateRoute>,
+  })),
 ]);
 
-export default router;
+const AppRouter = () => <RouterProvider router={router} />;
+
+export default AppRouter;
