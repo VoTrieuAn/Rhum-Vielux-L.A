@@ -2,8 +2,10 @@ import ProductCard from "@components/Card/ProductCard";
 import SideBarFilter from "./SideBarFilter";
 import { BiFilterAlt } from "react-icons/bi";
 import Pagination from "@components/Pagination";
+import { useProductContext } from "@context/ProductProvider";
 
 const ProductList = () => {
+  const { products } = useProductContext();
   return (
     <>
       <section className="p-normal">
@@ -20,14 +22,18 @@ const ProductList = () => {
                 <BiFilterAlt className="block md:hidden" />
               </div>
               <div className="mt-10 mb-5 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3 lg:gap-5">
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
+                {products.map((item) => (
+                  <ProductCard
+                    key={item.id}
+                    id={item.id}
+                    name={item.name}
+                    origin={item.origin}
+                    volume={item.volume}
+                    alcohol={item.alcohol}
+                    price={item.price}
+                    image={item.image}
+                  />
+                ))}
               </div>
             </div>
           </div>

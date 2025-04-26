@@ -1,11 +1,31 @@
 import { BsCartPlus } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import { FaFacebook } from "react-icons/fa6";
 import { LuShare2 } from "react-icons/lu";
 import { PACKAGE_PRODUCT, PRODUCT_DETAILS } from "@libs/constant";
+import { useEffect, useState } from "react";
 
 const ProductDetailMain = () => {
+  const { id } = useParams();
+  const [product, setProduct] = useState({});
+  useEffect(() => {
+    const fetchProductDetails = async () => {
+      try {
+        const response = await fetch(
+          `https://680cbacf2ea307e081d4de69.mockapi.io/api/v1/products/${id}`,
+        );
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        setProduct(data);
+      } catch (error) {
+        console.error("Error fetching product details:", error);
+      }
+    };
+    fetchProductDetails();
+  }, [id]);
   return (
     <>
       <section className="p-normal rounded-[20px] border border-[#EBEEEF]">
@@ -13,8 +33,8 @@ const ProductDetailMain = () => {
           <div className="grid grid-cols-1 justify-between gap-8 lg:grid-cols-2">
             <div className="w-full overflow-hidden rounded-[10px]">
               <img
-                src="/rhum-detail-item.jpg"
-                alt=""
+                src={product.image}
+                alt={product.name}
                 className="image-cover aspect-square"
               />
             </div>
@@ -25,16 +45,14 @@ const ProductDetailMain = () => {
                   <IoIosArrowForward />
                   <Link to="/products">Sản phẩm</Link>
                   <IoIosArrowForward />
-                  <div className="cursor-pointer font-bold">
-                    RƯỢU CAM GIÁ - LONG AN
-                  </div>
+                  <div className="cursor-pointer font-bold">{product.name}</div>
                 </div>
                 <div className="text-[14px]">
                   <h1 className="mb-1.5 text-[20px] font-bold lg:text-2xl">
-                    RƯỢU CAM GIÁ - LONG AN
+                    {product.name}
                   </h1>
                   <p className="text-error-500 mb-3 text-[18px] font-bold lg:text-[20px]">
-                    600.000 VNĐ
+                    {product.price === 0 ? "Liên hệ" : `${product.price}đ`}
                   </p>
                   <div className="grid grid-cols-2 items-center lg:grid-cols-3">
                     <div className="text-error-300">
@@ -48,14 +66,15 @@ const ProductDetailMain = () => {
                       ))}
                     </div>
                     <div className="text-dark col-span-0 lg:col-span-2">
-                      {PRODUCT_DETAILS.map((item, index) => (
-                        <div
-                          key={index}
-                          className="border-b-1 border-[#EBEEEF] px-3 py-1 font-medium"
-                        >
-                          {item.value}
-                        </div>
-                      ))}
+                      <div className="border-b-1 border-[#EBEEEF] px-3 py-1 font-medium">
+                        {product.origin}
+                      </div>
+                      <div className="border-b-1 border-[#EBEEEF] px-3 py-1 font-medium">
+                        {product.volume}ml
+                      </div>
+                      <div className="border-b-1 border-[#EBEEEF] px-3 py-1 font-medium">
+                        ≥ {product.alcohol}%
+                      </div>
                     </div>
                   </div>
                 </div>
