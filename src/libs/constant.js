@@ -1,3 +1,5 @@
+import { PREFIX_ADMIN } from "@config/system";
+
 export const MENU_CLIENT = [
   {
     name: "Trang Chủ",
@@ -14,6 +16,21 @@ export const MENU_CLIENT = [
   {
     name: "Liên Hệ",
     path: "/contact",
+  },
+];
+
+export const MENU_ADMIN = [
+  {
+    name: "Tổng Quan",
+    path: `/${PREFIX_ADMIN}/dashboard`,
+  },
+  // {
+  //   name: "Danh mục sản phẩm",
+  //   path: `/${PREFIX_ADMIN}/categories`,
+  // },
+  {
+    name: "Danh sách sản phẩm",
+    path: `/${PREFIX_ADMIN}/products`,
   },
 ];
 
@@ -116,12 +133,6 @@ export const FILTER_ITEMS = [
       { id: "500-1000", name: "500.000đ – 1.000.000đ" },
     ],
   },
-];
-
-export const PRODUCT_DETAILS = [
-  { label: "Xuất xứ", value: "Việt Nam" },
-  { label: "Dung tích", value: "500 ml" },
-  { label: "Nồng độ", value: "≥ 26%" },
 ];
 
 export const PACKAGE_PRODUCT = [
