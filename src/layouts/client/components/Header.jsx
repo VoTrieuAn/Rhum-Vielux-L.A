@@ -11,7 +11,7 @@ const Header = () => {
   const ref = useRef("");
   const navigate = useNavigate();
 
-  if (pathname === "/about") {
+  if (pathname === "/about" || pathname === "/login") {
     Swal.fire({
       title: "Trang chưa sẵn sàng",
       icon: "warning",
@@ -76,7 +76,9 @@ const Header = () => {
             </div>
             <div className="text-primary relative flex gap-3.5 text-[32px] sm:text-[35px]">
               <IoIosSearch className="hover:text-secondary inline-block cursor-pointer transition-colors duration-300 lg:hidden" />
-              <FiUser className="hover:text-secondary cursor-pointer transition-colors duration-300" />
+              <Link to="/login">
+                <FiUser className="hover:text-secondary cursor-pointer transition-colors duration-300" />
+              </Link>
               <MdOutlineShoppingCart className="hover:text-secondary cursor-pointer transition-colors duration-300" />
               {/*right-[-6px] && > 10  right-[-16px] && > 99 99+ right-[-20px] */}
               <div className="absolute top-[-10px] right-[-6px] block rounded-full bg-[#FF0000] px-[5px] text-[15px] text-white">
