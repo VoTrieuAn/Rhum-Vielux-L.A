@@ -1,67 +1,18 @@
+import { PREFIX_ADMIN } from "@config/system";
+import { useProductContext } from "@context/ProductProvider";
 import { Search, ChevronDown, Plus } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const ProductPage = () => {
   const [activeTab, setActiveTab] = useState("all");
 
-  const products = [
-    {
-      id: 1,
-      title: "Sản phẩm DDDDD",
-      image: "/placeholder.svg?height=80&width=80",
-      price: "1000$",
-      position: 36,
-      status: "Hoạt động",
-      createdBy: "Võ Triều An",
-      createdAt: "22/09/2024 11:52:34",
-    },
-    {
-      id: 2,
-      title: "iPhone 15 Pro Max 512GB | Chính hãng VN/A",
-      image: "/placeholder.svg?height=80&width=80",
-      price: "1500$",
-      position: 35,
-      status: "Hoạt động",
-      createdBy: "Võ Triều An",
-      createdAt: "20/08/2024 20:07:08",
-    },
-    {
-      id: 3,
-      title: "Chó chó nhỏ dễ thương quà tròn quà đặt",
-      image: "/placeholder.svg?height=80&width=80",
-      price: "0$",
-      position: 34,
-      status: "Hoạt động",
-      createdBy: "Võ Triều An",
-      createdAt: "19/08/2024 13:53:36",
-    },
-    {
-      id: 4,
-      title: "Sản phẩm 01 abc",
-      image: "/placeholder.svg?height=80&width=80",
-      price: "120$",
-      position: 31,
-      status: "Hoạt động",
-      createdBy: "",
-      createdAt: "",
-    },
-    {
-      id: 5,
-      title: "Honey Jar",
-      image: "/placeholder.svg?height=80&width=80",
-      price: "6$",
-      position: 27,
-      status: "Hoạt động",
-      createdBy: "",
-      createdAt: "",
-    },
-  ];
+  const { products } = useProductContext();
 
   return (
     <>
       {/* Main Content */}
       <h1 className="mb-4 text-3xl font-bold">Danh sách sản phẩm</h1>
-
       {/* Filters */}
       <div className="mb-6">
         <div className="mb-2 text-sm text-gray-600">Bộ lọc và tìm kiếm</div>
@@ -150,10 +101,13 @@ const ProductPage = () => {
               Áp dụng
             </button>
           </div>
-          <button className="flex cursor-pointer items-center gap-1 rounded border border-green-500 px-3 py-1 text-sm text-green-500">
+          <Link
+            to={`/${PREFIX_ADMIN}/products/create`}
+            className="transition-colors-300 flex cursor-pointer items-center gap-1 rounded border border-green-500 px-3 py-1 text-sm text-green-500 hover:bg-green-500 hover:text-white"
+          >
             <Plus size={16} />
             Thêm mới
-          </button>
+          </Link>
         </div>
 
         {/* Table */}

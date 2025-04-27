@@ -87,4 +87,9 @@
   button.swal2-confirm:focus {
     box-shadow: none !important;
   }
+
+  /* Tiny MCE */
+  .tox-statusbar__branding {
+    display: none;
+  }
 }

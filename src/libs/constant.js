@@ -105,6 +105,12 @@ export const LEGAL_ITEMS = [
   },
 ];
 
+export const PRODUCT_DETAILS = [
+  { label: "Xuất xứ", value: "Việt Nam" },
+  { label: "Dung tích", value: "500 ml" },
+  { label: "Nồng độ", value: "≥ 26%" },
+];
+
 export const FILTER_ITEMS = [
   {
     id: 1,
