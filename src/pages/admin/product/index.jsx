@@ -1,16 +1,18 @@
 import Action from "@components/Actions";
 import ButtonStatus from "@components/Actions/ButtonStatus";
+import SelectAction from "@components/Actions/SelectAction";
 import Filters from "@components/Filters";
 import { PREFIX_ADMIN } from "@config/system";
 import { useProductContext } from "@context/ProductProvider";
 import { ChevronDown, Plus } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 
 const ProductPage = () => {
   const { products } = useProductContext();
   const [searchParams] = useSearchParams();
   const [productFilter, setProductFilter] = useState(products);
+  const [checkedIds, setCheckedIds] = useState([]);
   const status = searchParams.get("status") || "";
   const keyword = searchParams.get("keyword") || "";
 
@@ -32,6 +34,20 @@ const ProductPage = () => {
     }
   }, [status, keyword, products]);
 
+  const toggleCheck = (id) => {
+    setCheckedIds((prev) =>
+      prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id],
+    );
+  };
+
+  const handleCheckAll = (checked) => {
+    if (checked) {
+      setCheckedIds(products.map((product) => product.id)); // hoặc mảng id động từ API
+    } else {
+      setCheckedIds([]);
+    }
+  };
+
   return (
     <>
       {/* Main Content */}
@@ -47,17 +63,7 @@ const ProductPage = () => {
 
         <div className="flex items-center justify-between p-4">
           <div className="flex items-center gap-2">
-            <div className="relative w-40">
-              <select className="w-full appearance-none rounded border bg-white px-3 py-1 pr-10 text-sm">
-                <option value="active">Hoạt động</option>
-                <option value="inactive">Dừng hoạt động</option>
-                <option value="position">Thay đổi vị trí</option>
-                <option value="delete-all">Xóa tất cả</option>
-              </select>
-              <div className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 transform">
-                <ChevronDown size={14} />
-              </div>
-            </div>
+            <SelectAction />
             <button className="cursor-pointer rounded bg-blue-500 px-3 py-1 text-sm text-white">
               Áp dụng
             </button>
@@ -77,7 +83,13 @@ const ProductPage = () => {
             <thead>
               <tr className="bg-gray-50">
                 <th className="w-10 px-4 py-3">
-                  <input type="checkbox" className="rounded" />
+                  <input
+                    type="checkbox"
+                    id="checkAll"
+                    className="rounded"
+                    checked={checkedIds.length === productFilter.length}
+                    onChange={(e) => handleCheckAll(e.target.checked)}
+                  />
                 </th>
                 <th className="w-10 px-4 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
                   STT
@@ -109,7 +121,13 @@ const ProductPage = () => {
               {productFilter.map((product, index) => (
                 <tr key={product.id} className="hover:bg-gray-50">
                   <td className="px-4 py-3">
-                    <input type="checkbox" className="rounded" />
+                    <input
+                      type="checkbox"
+                      className="rounded"
+                      checked={checkedIds.includes(product.id)}
+                      // ref={(el) => (checkboxesRef.current[index] = el)}
+                      onChange={() => toggleCheck(product.id)}
+                    />
                   </td>
                   <td className="px-4 py-3 text-sm text-gray-900">
                     {index + 1}
