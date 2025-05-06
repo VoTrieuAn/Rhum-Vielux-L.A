@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const ButtonEdit = ({ id }) => {
   return (
     <Link
-      to={`/${PREFIX_ADMIN}/products/edit/${id}`}
+      to={`/${PREFIX_ADMIN}/products/${id}/edit`}
       className="rounded bg-yellow-500 px-2 py-1 text-xs text-white"
     >
       Sửa

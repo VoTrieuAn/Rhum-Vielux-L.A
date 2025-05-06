@@ -1,12 +1,12 @@
 import { Editor } from "@tinymce/tinymce-react";
 
-const MyEditor = ({ editorRef }) => {
+const MyEditor = ({ value = "", editorRef }) => {
   return (
     <>
       <Editor
         apiKey={import.meta.env.VITE_TINYCME}
         onInit={(_evt, editor) => (editorRef.current = editor)}
-        initialValue=""
+        initialValue={value}
         init={{
           height: 500,
           menubar: false,

@@ -2,19 +2,21 @@ import { useState, useRef } from "react";
 import MyEditor from "@utils/MyEditor";
 import { draggableModal } from "@libs/sweet-alert";
 import { normalized } from "@libs/slug";
+import { useProductContext } from "@context/ProductProvider";
+import { useParams } from "react-router-dom";
 
-const ProductCreatePage = () => {
-  const [title, setTitle] = useState("");
-  // const [category, setCategory] = useState("");
-  // const [isFeatured, setIsFeatured] = useState(false);
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState(0);
-  const [alcohol, setAlcohol] = useState(0);
-  const [stock, setStock] = useState(0);
-  const [position, setPosition] = useState("");
-  const [isActive, setIsActive] = useState(true);
+const ProductEditPage = () => {
+  const { id } = useParams();
+  const { products, setProducts } = useProductContext();
+  const product = products.find((item) => item.id === id);
+  const [title, setTitle] = useState(product?.name || "");
+  const [description, setDescription] = useState(product?.description || "");
+  const [price, setPrice] = useState(product?.price || 0);
+  const [alcohol, setAlcohol] = useState(product?.alcohol || 0);
+  const [stock, setStock] = useState(product?.stock || 0);
+  const [position, setPosition] = useState(product?.position || "");
+  const [isActive, setIsActive] = useState(product?.status === "active");
   const [selectedFile, setSelectedFile] = useState(null);
-  // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const fileInputRef = useRef(null);
 
   const editorRef = useRef(null);
@@ -38,34 +40,34 @@ const ProductCreatePage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!selectedFile) {
-      draggableModal("Vui lòng chọn ảnh", "warning");
-      return;
-    }
-
     try {
-      const uploadUrl = `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/upload`;
-      const formData = new FormData();
-      formData.append("file", selectedFile);
-      formData.append(
-        "upload_preset",
-        import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET,
-      );
+      let imageUrl = product?.image;
 
-      const uploadRes = await fetch(uploadUrl, {
-        method: "POST",
-        body: formData,
-      });
+      // Nếu có ảnh mới, upload lên cloudinary
+      if (selectedFile) {
+        const uploadUrl = `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/upload`;
+        const formData = new FormData();
+        formData.append("file", selectedFile);
+        formData.append(
+          "upload_preset",
+          import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET,
+        );
 
-      const uploadData = await uploadRes.json();
-      // console.log("Upload thành công:", uploadData);
+        const uploadRes = await fetch(uploadUrl, {
+          method: "POST",
+          body: formData,
+        });
+        const uploadData = await uploadRes.json();
+        imageUrl = uploadData.secure_url;
+      }
 
-      const imageUrl = uploadData.secure_url;
       const slug = normalized(title);
       const productData = {
         name: title,
-        description,
-        origin: "Việt Nam",
+        description: editorRef.current
+          ? editorRef.current.getContent()
+          : description,
+        origin: product.origin || "Việt Nam",
         price: Number(price),
         alcohol: Number(alcohol),
         stock: Number(stock),
@@ -76,19 +78,27 @@ const ProductCreatePage = () => {
         deleted: false,
       };
 
-      const saveRes = await fetch(`${import.meta.env.VITE_API_URL}/products`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      // Dùng PUT hoặc PATCH thay vì POST để cập nhật
+      const saveRes = await fetch(
+        `${import.meta.env.VITE_API_URL}/products/${id}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(productData),
         },
-        body: JSON.stringify(productData),
-      });
+      );
 
       if (!saveRes.ok) {
-        draggableModal("Lưu sản phẩm thất bại", "error");
+        draggableModal("Cập nhật sản phẩm thất bại", "error");
+        return;
       }
 
-      draggableModal("Lưu sản phẩm thành công", "success");
+      setProducts((prevProducts) =>
+        prevProducts.map((item) =>
+          item.id === id ? { ...item, ...productData } : item,
+        ),
+      );
+      draggableModal("Cập nhật sản phẩm thành công", "success");
     } catch (err) {
       draggableModal("Có lỗi xảy ra", "error");
     }
@@ -114,94 +124,6 @@ const ProductCreatePage = () => {
             />
           </div>
 
-          {/* Category */}
-          {/* <div>
-            <label
-              htmlFor="category"
-              className="mb-1 block text-sm font-medium"
-            >
-              Danh mục cha
-            </label>
-            <div className="relative">
-              <button
-                type="button"
-                className="flex w-full items-center justify-between rounded border border-gray-300 bg-white px-3 py-2 text-left"
-                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              >
-                <span className="text-gray-500">
-                  {category || "-- Chọn danh mục cha --"}
-                </span>
-                <ChevronDown className="h-4 w-4 text-gray-500" />
-              </button>
-
-              {isDropdownOpen && (
-                <div className="absolute z-10 mt-1 w-full rounded border border-gray-300 bg-white shadow-lg">
-                  <ul>
-                    <li
-                      className="cursor-pointer px-3 py-2 hover:bg-gray-100"
-                      onClick={() => {
-                        setCategory("Danh mục 1");
-                        setIsDropdownOpen(false);
-                      }}
-                    >
-                      Danh mục 1
-                    </li>
-                    <li
-                      className="cursor-pointer px-3 py-2 hover:bg-gray-100"
-                      onClick={() => {
-                        setCategory("Danh mục 2");
-                        setIsDropdownOpen(false);
-                      }}
-                    >
-                      Danh mục 2
-                    </li>
-                    <li
-                      className="cursor-pointer px-3 py-2 hover:bg-gray-100"
-                      onClick={() => {
-                        setCategory("Danh mục 3");
-                        setIsDropdownOpen(false);
-                      }}
-                    >
-                      Danh mục 3
-                    </li>
-                  </ul>
-                </div>
-              )}
-            </div>
-          </div> */}
-
-          {/* Featured */}
-          {/* <div>
-            <div className="flex items-center gap-4">
-              <div className="flex items-center">
-                <input
-                  type="radio"
-                  id="featured"
-                  name="featured"
-                  checked={isFeatured}
-                  onChange={() => setIsFeatured(true)}
-                  className="mr-2"
-                />
-                <label htmlFor="featured" className="text-sm">
-                  Nổi bật
-                </label>
-              </div>
-              <div className="flex items-center">
-                <input
-                  type="radio"
-                  id="notFeatured"
-                  name="featured"
-                  checked={!isFeatured}
-                  onChange={() => setIsFeatured(false)}
-                  className="mr-2"
-                />
-                <label htmlFor="notFeatured" className="text-sm">
-                  Không
-                </label>
-              </div>
-            </div>
-          </div> */}
-
           {/* Description */}
           <div>
             <label
@@ -210,7 +132,7 @@ const ProductCreatePage = () => {
             >
               Mô tả
             </label>
-            <MyEditor editorRef={editorRef} />
+            <MyEditor value={description} editorRef={editorRef} />
           </div>
           {/* Price */}
           <div>
@@ -278,7 +200,7 @@ const ProductCreatePage = () => {
                 accept="image/*"
               />
             </div>
-            {selectedFile && (
+            {selectedFile ? (
               <div className="mt-2 inline-flex h-25 w-auto overflow-hidden">
                 <img
                   src={selectedFile ? URL.createObjectURL(selectedFile) : ""}
@@ -286,9 +208,15 @@ const ProductCreatePage = () => {
                   className="h-full w-full object-contain"
                 />
               </div>
+            ) : (
+              <div className="mt-2 inline-flex h-25 w-auto overflow-hidden">
+                <img
+                  src={product?.image}
+                  alt={title}
+                  className="h-full w-full object-contain"
+                />
+              </div>
             )}
-
-            {/* <UploadWidget /> */}
           </div>
 
           {/* Position */}
@@ -347,7 +275,7 @@ const ProductCreatePage = () => {
               onClick={log}
               className="cursor-pointer rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
             >
-              Tạo mới
+              Cập nhật
             </button>
           </div>
         </div>
@@ -356,4 +284,4 @@ const ProductCreatePage = () => {
   );
 };
 
-export default ProductCreatePage;
+export default ProductEditPage;
