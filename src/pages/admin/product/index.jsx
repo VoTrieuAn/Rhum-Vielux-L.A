@@ -1,5 +1,6 @@
 import Action from "@components/Actions";
 import ButtonStatus from "@components/Actions/ButtonStatus";
+import PositionAction from "@components/Actions/PositionAction";
 import SelectAction from "@components/Actions/SelectAction";
 import Filters from "@components/Filters";
 import { PREFIX_ADMIN } from "@config/system";
@@ -155,11 +156,7 @@ const ProductPage = () => {
                     {product.stock > 0 ? product.stock : "Hết hàng"}
                   </td>
                   <td className="px-4 py-3 text-sm text-gray-900">
-                    <input
-                      type="text"
-                      defaultValue={product.position}
-                      className="w-12 rounded border px-2 py-1 text-center"
-                    />
+                    <PositionAction id={product.id} value={product.position} />
                   </td>
                   <td className="px-4 py-3 text-sm">
                     <ButtonStatus id={product.id} status={product.status} />

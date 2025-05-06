@@ -5,7 +5,7 @@ import { useState } from "react";
 
 const SelectAction = ({ ids, setIds }) => {
   const [selectedValue, setSelectedValue] = useState("active");
-  const { products, setProducts } = useProductContext();
+  const { products, setProducts, loading, setLoading } = useProductContext();
   const handleSelectChange = (event) => {
     console.log(event.target.value);
     setSelectedValue(event.target.value);
@@ -31,9 +31,7 @@ const SelectAction = ({ ids, setIds }) => {
                 body: JSON.stringify({ ...productData, status: "active" }),
               });
               if (response.ok) {
-                console.log(`Sản phẩm ${id} đã được kích hoạt.`);
                 const updatedProduct = await response.json();
-                console.log(updatedProduct);
                 setProducts((prev) =>
                   prev.map((product) => {
                     if (product.id === id) {
@@ -61,9 +59,7 @@ const SelectAction = ({ ids, setIds }) => {
                 body: JSON.stringify({ ...productData, status: "inactive" }),
               });
               if (response.ok) {
-                console.log(`Sản phẩm ${id} đã được dừng hoạt động.`);
                 const updatedProduct = await response.json();
-                console.log(updatedProduct);
                 setProducts((prev) =>
                   prev.map((product) => {
                     if (product.id === id) {
@@ -90,9 +86,7 @@ const SelectAction = ({ ids, setIds }) => {
                 body: JSON.stringify({ ...productData, deleted: true }),
               });
               if (response.ok) {
-                console.log(`Sản phẩm ${id} đã được xóa.`);
                 const updatedProduct = await response.json();
-                console.log(updatedProduct);
                 setProducts((prev) =>
                   prev.filter((product) => product.id !== id),
                 );

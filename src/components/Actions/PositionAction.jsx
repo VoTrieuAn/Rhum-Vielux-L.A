@@ -1,22 +1,24 @@
 import { useProductContext } from "@context/ProductProvider";
 import { dialogWithButton, draggableModal } from "@libs/sweet-alert";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-const ButtonStatus = ({ id, status }) => {
+const PositionAction = ({ id, value = "" }) => {
   const [product, setProduct] = useState({});
   const { products, loading, setLoading } = useProductContext();
+  const ref = useRef("");
 
   useEffect(() => {
     setProduct(products.find((product) => product.id === id));
   }, [id, products]);
 
-  const handleStatus = () => {
+  const handleChange = () => {
+    const newValue = ref.current.value;
     const fetchRes = async () => {
       const productData = {
         ...product,
-        status: status === "active" ? "inactive" : "active",
+        position: Number(newValue),
       };
-      console.log();
+      console.log(productData);
       const saveRes = await fetch(
         `${import.meta.env.VITE_API_URL}/products/${id}`,
         {
@@ -30,30 +32,34 @@ const ButtonStatus = ({ id, status }) => {
 
       if (!saveRes.ok) {
         draggableModal(
-          "Thay đổi trạng thái sản phẩm thất bại! Có lỗi xãy ra",
+          "Thay đổi vị trí sản phẩm thất bại! Có lỗi xãy ra",
           "error",
         );
         return;
       }
 
-      draggableModal("Thay đổi trạng thái sản phẩm thành công", "success");
+      draggableModal("Thay đổi vị trí sản phẩm thành công", "success");
 
       setLoading(!loading);
     };
 
     dialogWithButton(
-      "Bạn có thật sự muốn thay đổi trạng thái của sản phẩm hiện tại?",
+      "Bạn có thật sự muốn thay đổi vị trí của sản phẩm hiện tại?",
       fetchRes,
     );
   };
-
   return (
-    <button
-      className={`cursor-pointer rounded-full ${status === "active" ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"} px-2 py-1 text-xs`}
-      onClick={handleStatus}
-    >
-      {status}
-    </button>
+    <input
+      ref={ref}
+      type="text"
+      defaultValue={value}
+      className="w-12 rounded border px-2 py-1 text-center"
+      onKeyUp={(e) => {
+        if (e.key === "Enter") {
+          handleChange();
+        }
+      }}
+    />
   );
 };
-export default ButtonStatus;
+export default PositionAction;
