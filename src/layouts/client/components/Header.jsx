@@ -8,18 +8,16 @@ import { useRef } from "react";
 import { draggableModal } from "@libs/sweet-alert";
 import { PREFIX_ADMIN } from "@config/system";
 import { useProductContext } from "@context/ProductProvider";
+import { normalized } from "@libs/slug";
 const Header = () => {
   const { pathname } = useLocation();
   const { cartState } = useProductContext();
-
-  console.log(cartState.items);
+  const ref = useRef("");
+  const navigate = useNavigate();
 
   const totalQuantity = cartState.items.reduce((acc, curr) => {
     return acc + curr.quantity;
   }, 0);
-
-  const ref = useRef("");
-  const navigate = useNavigate();
 
   if (pathname === "/about" || pathname === "/login") {
     draggableModal("Trang chưa sẵn sàng", "warning");
@@ -29,9 +27,12 @@ const Header = () => {
   const handleSearch = (e) => {
     if (e.key === "Enter") {
       const searchValue = ref.current.value;
+      if (!searchValue) {
+        return;
+      }
       navigate("/search", {
         state: {
-          search: searchValue,
+          search: normalized(searchValue),
         },
       });
     }

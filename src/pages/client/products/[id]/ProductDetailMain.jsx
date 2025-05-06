@@ -19,6 +19,7 @@ const ProductDetailMain = ({ product }) => {
   const handleClickButton = () => {
     cartDispatch(addInputProductAction(product, quantity));
     draggableModal("Thêm vào giỏ hàng thành công", "success");
+    setQuantity(1);
   };
 
   return (
