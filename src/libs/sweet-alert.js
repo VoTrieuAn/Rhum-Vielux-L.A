@@ -8,12 +8,16 @@ export const draggableModal = (title, icon = "success", draggable = true) => {
   });
 };
 
-export const dialogWithButton = (title, callback) => {
+export const dialogWithButton = (
+  title,
+  callback,
+  confirmButtonText = "Lưu lại",
+) => {
   Swal.fire({
     title,
     icon: "warning",
     showCancelButton: true,
-    confirmButtonText: "Lưu lại",
+    confirmButtonText,
   }).then((result) => {
     /* Read more about isConfirmed, isDenied below */
     if (result.isConfirmed) {

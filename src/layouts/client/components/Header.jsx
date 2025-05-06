@@ -4,7 +4,6 @@ import { FiUser } from "react-icons/fi";
 import { CiMenuBurger } from "react-icons/ci";
 import { MENU_CLIENT } from "@libs/constant";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
 import { useRef } from "react";
 import { draggableModal } from "@libs/sweet-alert";
 import { PREFIX_ADMIN } from "@config/system";
@@ -12,6 +11,9 @@ import { useProductContext } from "@context/ProductProvider";
 const Header = () => {
   const { pathname } = useLocation();
   const { cartState } = useProductContext();
+
+  console.log(cartState.items);
+
   const totalQuantity = cartState.items.reduce((acc, curr) => {
     return acc + curr.quantity;
   }, 0);
@@ -83,11 +85,13 @@ const Header = () => {
               <Link to={`/${PREFIX_ADMIN}/dashboard`}>
                 <FiUser className="hover:text-secondary cursor-pointer transition-colors duration-300" />
               </Link>
-              <MdOutlineShoppingCart className="hover:text-secondary cursor-pointer transition-colors duration-300" />
-              {/*right-[-6px] && > 10  right-[-16px] && > 99 99+ right-[-20px] */}
-              <div className="absolute top-[-10px] right-[-6px] block rounded-full bg-[#FF0000] px-[5px] text-[15px] text-white">
-                {totalQuantity > 99 ? "99+" : totalQuantity}
-              </div>
+              <Link to="/cart">
+                <MdOutlineShoppingCart className="hover:text-secondary cursor-pointer transition-colors duration-300" />
+                {/*right-[-6px] && > 10  right-[-16px] && > 99 99+ right-[-20px] */}
+                <div className="absolute top-[-10px] right-[-6px] block rounded-full bg-[#FF0000] px-[5px] text-[15px] text-white">
+                  {totalQuantity > 99 ? "99+" : totalQuantity}
+                </div>
+              </Link>
             </div>
           </div>
         </div>

@@ -14,7 +14,7 @@
       "@routes/*": ["src/routes/*"],
       "@layouts/*": ["src/layouts/*"],
       "@utils/*": ["src/utils/*"],
-      "@reducers/*": ["src/reducers/*"],
+      "@reducer/*": ["src/reducer/*"],
     }
   }
 }

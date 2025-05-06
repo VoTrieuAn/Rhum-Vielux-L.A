@@ -1,6 +1,7 @@
 import DefaultLayout from "@layouts/client/DefaultLayout";
 import AboutPage from "@pages/client/about";
 import LoginPage from "@pages/client/auth/LoginPage";
+import CartPage from "@pages/client/cart";
 import ContactPage from "@pages/client/contact";
 import HomePage from "@pages/client/home";
 import ProductsPage from "@pages/client/products";
@@ -61,6 +62,14 @@ const publicRoutes = [
     element: (
       <DefaultLayout>
         <LoginPage />
+      </DefaultLayout>
+    ),
+  },
+  {
+    path: "/cart",
+    element: (
+      <DefaultLayout>
+        <CartPage />
       </DefaultLayout>
     ),
   },

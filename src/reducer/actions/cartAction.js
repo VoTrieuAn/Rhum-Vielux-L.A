@@ -1,25 +1,32 @@
-export const addMovieAction = (item) => {
+export const addInputProductAction = (item, quantity) => {
   return {
-    payload: { ...item, quantity: 1 },
+    payload: { ...item, quantity },
+    type: "cart/addInput",
+  };
+};
+
+export const addProductAction = (item) => {
+  return {
+    payload: item,
     type: "cart/add",
   };
 };
 
-export const minusMovieAction = (id) => {
+export const minusProductAction = (id) => {
   return {
     payload: id,
     type: "cart/minus",
   };
 };
 
-export const deleteMovieAction = (id) => {
+export const deleteProductAction = (id) => {
   return {
     payload: id,
     type: "cart/delete",
   };
 };
 
-export const deleteAllMovieAction = () => {
+export const deleteAllProductAction = () => {
   return {
     type: "cart/deleteAll",
   };

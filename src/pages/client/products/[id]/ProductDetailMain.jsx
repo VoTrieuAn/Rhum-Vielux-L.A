@@ -1,15 +1,26 @@
 import { BsCartPlus } from "react-icons/bs";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import { FaFacebook } from "react-icons/fa6";
 import { LuShare2 } from "react-icons/lu";
-import { PACKAGE_PRODUCT, PRODUCT_DETAILS } from "@libs/constant";
+import { PRODUCT_DETAILS } from "@libs/constant";
 import { draggableModal } from "@libs/sweet-alert";
+import { useProductContext } from "@context/ProductProvider";
+import { addInputProductAction } from "@reducer/actions/cartAction";
+import { useState } from "react";
 
 const ProductDetailMain = ({ product }) => {
+  const [quantity, setQuantity] = useState(1);
+
   const handleBuyNow = () => {
     draggableModal("Tính năng này chưa được phát triển", "info");
   };
+  const { cartDispatch } = useProductContext();
+  const handleClickButton = () => {
+    cartDispatch(addInputProductAction(product, quantity));
+    draggableModal("Thêm vào giỏ hàng thành công", "success");
+  };
+
   return (
     <>
       <section className="p-normal rounded-[20px] border border-[#EBEEEF]">
@@ -36,7 +47,9 @@ const ProductDetailMain = ({ product }) => {
                     {product.name}
                   </h1>
                   <p className="text-error-500 mb-3 text-[18px] font-bold lg:text-[20px]">
-                    {product.price === 0 ? "Liên hệ" : `${product.price}đ`}
+                    {product.price === 0
+                      ? "Liên hệ"
+                      : `${product.price?.toLocaleString("vi-VN")}đ`}
                   </p>
                   <div className="grid grid-cols-2 items-center lg:grid-cols-3">
                     <div className="text-error-300">
@@ -85,18 +98,31 @@ const ProductDetailMain = ({ product }) => {
                     Số lượng:
                   </div>
                   <div className="text-dark col-span-2 grid grid-cols-1 items-center gap-2 lg:flex lg:grid-cols-2 lg:gap-3">
-                    <div className="flex w-fit items-center border">
-                      <button className="cursor-pointer px-3 py-1 text-lg font-bold text-black">
+                    <div className="flex w-fit items-center overflow-hidden rounded-[4px] border border-gray-300">
+                      <button
+                        className="cursor-pointer px-3 py-1 text-lg font-bold text-gray-600 hover:bg-gray-100"
+                        disabled={quantity <= 1}
+                        onClick={() => {
+                          if (quantity > 1) {
+                            setQuantity(quantity - 1);
+                          }
+                        }}
+                      >
                         −
                       </button>
                       <input
                         type="text"
                         className="text-error-500 h-full w-10 text-center outline-none"
-                        defaultValue={1}
+                        value={quantity}
                         readOnly
                         onChange={(e) => setQuantity(Number(e.target.value))}
                       />
-                      <button className="cursor-pointer px-3 py-1 text-lg font-bold text-black">
+                      <button
+                        className="cursor-pointer px-3 py-1 text-lg font-bold text-gray-600 hover:bg-gray-100"
+                        onClick={() => {
+                          setQuantity(quantity + 1);
+                        }}
+                      >
                         +
                       </button>
                     </div>
@@ -106,7 +132,10 @@ const ProductDetailMain = ({ product }) => {
                   </div>
                 </div>
                 <div className="mt-4 grid grid-cols-1 items-center gap-3 text-[14px] lg:grid-cols-2 lg:gap-5">
-                  <button className="transition-colors-300 border-error-500 text-error-500 flex w-full cursor-pointer items-center justify-center gap-2 rounded-[4px] border bg-[rgba(229,0,0,.08)] py-3 hover:bg-[rgba(229,0,0,.163)]">
+                  <button
+                    className="transition-colors-300 border-error-500 text-error-500 flex w-full cursor-pointer items-center justify-center gap-2 rounded-[4px] border bg-[rgba(229,0,0,.08)] py-3 hover:bg-[rgba(229,0,0,.163)]"
+                    onClick={handleClickButton}
+                  >
                     <BsCartPlus />
                     Thêm vào giỏ hàng
                   </button>

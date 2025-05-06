@@ -2,6 +2,20 @@ import { cartInitial } from "@libs/initial-reducer";
 
 export const cartReducer = (state, action) => {
   switch (action.type) {
+    case "cart/addInput": // Thêm sản phẩm vào giỏ hàng với số lượng nhập từ input
+      const existingItemInput = state.items.find(
+        (item) => item.id === action.payload.id,
+      );
+      return {
+        ...state,
+        items: existingItemInput
+          ? state.items.map((item) =>
+              item.id === action.payload.id
+                ? { ...item, quantity: item.quantity + action.payload.quantity }
+                : item,
+            )
+          : [...state.items, action.payload],
+      };
     case "cart/add": {
       const existingItem = state.items.find(
         (item) => item.id === action.payload.id,
