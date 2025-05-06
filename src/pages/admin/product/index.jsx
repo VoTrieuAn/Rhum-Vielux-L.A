@@ -1,4 +1,5 @@
 import Action from "@components/Actions";
+import ButtonStatus from "@components/Actions/ButtonStatus";
 import Filters from "@components/Filters";
 import { PREFIX_ADMIN } from "@config/system";
 import { useProductContext } from "@context/ProductProvider";
@@ -137,11 +138,7 @@ const ProductPage = () => {
                     />
                   </td>
                   <td className="px-4 py-3 text-sm">
-                    <span
-                      className={`rounded-full ${product.status === "active" ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"} px-2 py-1 text-xs`}
-                    >
-                      {product.status}
-                    </span>
+                    <ButtonStatus id={product.id} status={product.status} />
                   </td>
 
                   <td className="px-4 py-3 text-sm text-gray-900">
