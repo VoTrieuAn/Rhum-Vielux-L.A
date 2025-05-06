@@ -4,9 +4,12 @@ import { IoIosArrowForward } from "react-icons/io";
 import { FaFacebook } from "react-icons/fa6";
 import { LuShare2 } from "react-icons/lu";
 import { PACKAGE_PRODUCT, PRODUCT_DETAILS } from "@libs/constant";
-import { useEffect, useState } from "react";
+import { draggableModal } from "@libs/sweet-alert";
 
 const ProductDetailMain = ({ product }) => {
+  const handleBuyNow = () => {
+    draggableModal("Tính năng này chưa được phát triển", "info");
+  };
   return (
     <>
       <section className="p-normal rounded-[20px] border border-[#EBEEEF]">
@@ -107,7 +110,10 @@ const ProductDetailMain = ({ product }) => {
                     <BsCartPlus />
                     Thêm vào giỏ hàng
                   </button>
-                  <button className="transition-colors-300 bg-error-500 flex w-full cursor-pointer items-center justify-center rounded-[4px] py-3 text-white hover:bg-[rgba(229,0,0,0.7)]">
+                  <button
+                    className="transition-colors-300 bg-error-500 flex w-full cursor-pointer items-center justify-center rounded-[4px] py-3 text-white hover:bg-[rgba(229,0,0,0.7)]"
+                    onClick={handleBuyNow}
+                  >
                     Mua ngay
                   </button>
                 </div>

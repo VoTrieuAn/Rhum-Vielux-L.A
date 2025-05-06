@@ -1,10 +1,27 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { cartInitial } from "@libs/initial-reducer";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  useState,
+} from "react";
+import { cartReducer } from "@reducer/cartReducer";
 
 const ProductContext = createContext();
 
 const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  // ✅ Lấy giỏ hàng từ localStorage khi load trang
+  const savedCart = JSON.parse(localStorage.getItem("cart")) || cartInitial;
+  const [cartState, cartDispatch] = useReducer(cartReducer, savedCart);
+
+  // ✅ Lưu giỏ hàng vào localStorage khi `cartState` thay đổi
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cartState));
+  }, [cartState]);
+
   useEffect(() => {
     try {
       const fetchProducts = async () => {
@@ -22,7 +39,14 @@ const ProductProvider = ({ children }) => {
   return (
     <>
       <ProductContext.Provider
-        value={{ products, setProducts, loading, setLoading }}
+        value={{
+          products,
+          setProducts,
+          loading,
+          setLoading,
+          cartState,
+          cartDispatch,
+        }}
       >
         {children}
       </ProductContext.Provider>
