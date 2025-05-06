@@ -1,30 +1,26 @@
-import { PREFIX_ADMIN } from "@config/system";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 const State = () => {
-  const [activeTab, setActiveTab] = useState("all");
-  const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const goToAll = () => {
-    navigate(`/${PREFIX_ADMIN}/products`);
-  };
-
-  const goToActive = () => {
-    navigate(`/${PREFIX_ADMIN}/products?status=active`);
-  };
-
-  const goToInactive = () => {
-    navigate(`/${PREFIX_ADMIN}/products?status=inactive`);
-  };
+  useEffect(() => {
+    const newParams = new URLSearchParams(searchParams);
+    if (activeTab) {
+      newParams.set("status", activeTab);
+    } else {
+      newParams.delete("status");
+    }
+    setSearchParams(newParams);
+  }, [activeTab, searchParams, setSearchParams]); // chạy lại khi activeTab đổi
 
   return (
     <div className="mb-4 flex gap-2">
       <button
-        className={`cursor-pointer rounded px-3 py-1 text-sm ${activeTab === "all" ? "bg-green-500 text-white" : "border bg-white"}`}
+        className={`cursor-pointer rounded px-3 py-1 text-sm ${activeTab === "" ? "bg-green-500 text-white" : "border bg-white"}`}
         onClick={() => {
-          setActiveTab("all");
-          goToAll();
+          setActiveTab("");
         }}
       >
         Tất cả
@@ -33,7 +29,6 @@ const State = () => {
         className={`cursor-pointer rounded px-3 py-1 text-sm ${activeTab === "active" ? "bg-green-500 text-white" : "border bg-white"}`}
         onClick={() => {
           setActiveTab("active");
-          goToActive();
         }}
       >
         Hoạt động
@@ -42,7 +37,6 @@ const State = () => {
         className={`cursor-pointer rounded px-3 py-1 text-sm ${activeTab === "inactive" ? "bg-green-500 text-white" : "border bg-white"}`}
         onClick={() => {
           setActiveTab("inactive");
-          goToInactive();
         }}
       >
         Dừng hoạt động

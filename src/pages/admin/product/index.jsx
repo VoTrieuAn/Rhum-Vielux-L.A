@@ -8,8 +8,9 @@ import { Link, useSearchParams } from "react-router-dom";
 const ProductPage = () => {
   const { products } = useProductContext();
   const [searchParams] = useSearchParams();
-  const status = searchParams.get("status");
   const [productFilter, setProductFilter] = useState(products);
+  const status = searchParams.get("status");
+  const keyword = searchParams.get("keyword");
 
   useEffect(() => {
     if (status) {
@@ -21,7 +22,13 @@ const ProductPage = () => {
     } else {
       setProductFilter(products.filter((product) => product.deleted === false));
     }
-  }, [status, products]);
+
+    if (keyword) {
+      setProductFilter((prev) =>
+        prev.filter((product) => product.slug.includes(keyword)),
+      );
+    }
+  }, [status, keyword, products]);
 
   return (
     <>
@@ -83,13 +90,13 @@ const ProductPage = () => {
                   Giá
                 </th>
                 <th className="px-4 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
+                  Số lượng
+                </th>
+                <th className="px-4 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
                   Vị trí
                 </th>
                 <th className="px-4 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
                   Trạng thái
-                </th>
-                <th className="px-4 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
-                  Tạo bởi
                 </th>
                 <th className="px-4 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
                   Hành động
@@ -119,9 +126,12 @@ const ProductPage = () => {
                     {product.price}
                   </td>
                   <td className="px-4 py-3 text-sm text-gray-900">
+                    {product.stock > 0 ? product.stock : "Hết hàng"}
+                  </td>
+                  <td className="px-4 py-3 text-sm text-gray-900">
                     <input
                       type="text"
-                      value={product.position}
+                      defaultValue={product.position}
                       className="w-12 rounded border px-2 py-1 text-center"
                     />
                   </td>
@@ -132,12 +142,7 @@ const ProductPage = () => {
                       {product.status}
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-sm text-gray-900">
-                    <div>{product.createdBy}</div>
-                    <div className="text-xs text-gray-500">
-                      {product.createdAt}
-                    </div>
-                  </td>
+
                   <td className="px-4 py-3 text-sm text-gray-900">
                     <div className="flex gap-1">
                       <button className="rounded bg-gray-600 px-2 py-1 text-xs text-white">

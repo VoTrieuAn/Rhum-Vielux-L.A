@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import MyEditor from "@utils/MyEditor";
 import { draggableModal } from "@libs/sweet-alert";
+import { normalized } from "@libs/slug";
 
 const ProductCreatePage = () => {
   const [title, setTitle] = useState("");
@@ -60,7 +61,7 @@ const ProductCreatePage = () => {
       // console.log("Upload thành công:", uploadData);
 
       const imageUrl = uploadData.secure_url;
-
+      const slug = normalized(title);
       const productData = {
         name: title,
         description,
@@ -70,6 +71,7 @@ const ProductCreatePage = () => {
         stock,
         image: imageUrl,
         position,
+        slug,
         status: isActive ? "active" : "inactive",
         deleted: false,
       };
