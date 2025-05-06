@@ -5,9 +5,8 @@ import { useState } from "react";
 
 const SelectAction = ({ ids, setIds }) => {
   const [selectedValue, setSelectedValue] = useState("active");
-  const { products, setProducts, loading, setLoading } = useProductContext();
+  const { products, loading, setLoading } = useProductContext();
   const handleSelectChange = (event) => {
-    console.log(event.target.value);
     setSelectedValue(event.target.value);
   };
 
@@ -31,18 +30,7 @@ const SelectAction = ({ ids, setIds }) => {
                 body: JSON.stringify({ ...productData, status: "active" }),
               });
               if (response.ok) {
-                const updatedProduct = await response.json();
-                setProducts((prev) =>
-                  prev.map((product) => {
-                    if (product.id === id) {
-                      return {
-                        ...product,
-                        status: updatedProduct.status,
-                      };
-                    }
-                    return product;
-                  }),
-                );
+                console.log(`Sản phẩm ${id} đã được kích hoạt.`);
               } else {
                 console.error(`Lỗi khi kích hoạt sản phẩm ${id}.`);
               }
@@ -59,18 +47,7 @@ const SelectAction = ({ ids, setIds }) => {
                 body: JSON.stringify({ ...productData, status: "inactive" }),
               });
               if (response.ok) {
-                const updatedProduct = await response.json();
-                setProducts((prev) =>
-                  prev.map((product) => {
-                    if (product.id === id) {
-                      return {
-                        ...product,
-                        status: updatedProduct.status,
-                      };
-                    }
-                    return product;
-                  }),
-                );
+                console.log(`Sản phẩm ${id} đã được dừng hoạt động.`);
               } else {
                 console.error(`Lỗi khi dừng hoạt động sản phẩm ${id}.`);
               }
@@ -86,11 +63,7 @@ const SelectAction = ({ ids, setIds }) => {
                 body: JSON.stringify({ ...productData, deleted: true }),
               });
               if (response.ok) {
-                const updatedProduct = await response.json();
-                setProducts((prev) =>
-                  prev.filter((product) => product.id !== id),
-                );
-                setIds((prev) => prev.filter((item) => item !== id));
+                console.log(`Sản phẩm ${id} đã được xóa.`);
               } else {
                 console.error(`Lỗi khi xóa sản phẩm ${id}.`);
               }
@@ -103,6 +76,8 @@ const SelectAction = ({ ids, setIds }) => {
           }
         }
         draggableModal("Cập nhật thành công", "success");
+        setLoading(!loading);
+        setIds([]);
       } catch (error) {
         draggableModal("Có lỗi xảy ra khi cập nhật sản phẩm", "error");
       }

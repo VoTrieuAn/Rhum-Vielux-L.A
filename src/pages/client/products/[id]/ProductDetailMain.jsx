@@ -6,26 +6,7 @@ import { LuShare2 } from "react-icons/lu";
 import { PACKAGE_PRODUCT, PRODUCT_DETAILS } from "@libs/constant";
 import { useEffect, useState } from "react";
 
-const ProductDetailMain = () => {
-  const { id } = useParams();
-  const [product, setProduct] = useState({});
-  useEffect(() => {
-    const fetchProductDetails = async () => {
-      try {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/products/${id}`,
-        );
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        setProduct(data);
-      } catch (error) {
-        console.error("Error fetching product details:", error);
-      }
-    };
-    fetchProductDetails();
-  }, [id]);
+const ProductDetailMain = ({ product }) => {
   return (
     <>
       <section className="p-normal rounded-[20px] border border-[#EBEEEF]">

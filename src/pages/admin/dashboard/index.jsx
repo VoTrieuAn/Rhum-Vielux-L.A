@@ -33,7 +33,7 @@ const DashboardPage = () => {
       </h2>
       <ol className="text-xl">
         <li className="mb-3">1. Võ Triều An - 22657391</li>
-        <li className="mb-3">2. Tô Phan Gia Bảo</li>
+        <li className="mb-3">2. Tô Phan Gia Bảo - 22682891</li>
       </ol>
       <div className="w-full">
         <div className="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm">

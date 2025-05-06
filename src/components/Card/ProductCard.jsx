@@ -21,7 +21,7 @@ const ProductCard = ({ id, name, origin, volume, alcohol, price, image }) => {
           </p>
           {/* 300ml */}
           <p className="font-medium text-[#C0392B]">
-            Dung dịch: <span className="text-[#667479]">{volume}</span>
+            Dung dịch: <span className="text-[#667479]">{volume}ml</span>
           </p>
           <p className="font-medium text-[#C0392B]">
             Nồng độ: <span className="text-[#667479]">≥ {alcohol}%...</span>

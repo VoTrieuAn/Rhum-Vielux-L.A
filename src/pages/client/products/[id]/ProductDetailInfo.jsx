@@ -1,4 +1,4 @@
-const ProductDetailInfo = () => {
+const ProductDetailInfo = ({ description }) => {
   return (
     <>
       <section className="p-normal">
@@ -19,34 +19,7 @@ const ProductDetailInfo = () => {
               công nghệ sản xuất hiện đại, đạt chuẩn ISO 22000:2018, đảm bảo vệ
               sinh an toàn thực phẩm và giữ trọn vẹn tinh hoa của rượu Rhum.
             </p>
-
-            <h4 className="text-secondary font-bold capitalize">Thành phần:</h4>
-            <p>Mật mía lên men, nước đã qua xử lý.</p>
-
-            <h4 className="text-secondary font-bold capitalize">
-              Bảo quản / Lưu ý:
-            </h4>
-            <ul className="list-disc pl-10">
-              <li>
-                Bảo quản nơi khô ráo, thoáng mát, tránh ánh nắng trực tiếp.
-              </li>
-              <li>
-                Sản phẩm dành cho khách hàng trên 18 tuổi, không dành cho phụ nữ
-                mang thai.
-              </li>
-              <li>
-                Thưởng thức có trách nhiệm, đã uống đồ uống có cồn thì không lái
-                xe!
-              </li>
-            </ul>
-
-            <h4 className="text-secondary font-bold capitalize">
-              Cách sử dụng:
-            </h4>
-            <p>
-              Uống trực tiếp hoặc pha chế cocktail để tạo ra những hương vị độc
-              đáo
-            </p>
+            <div dangerouslySetInnerHTML={{ __html: description }} />
 
             <h4 className="text-secondary font-bold capitalize">
               Rhum Vielux L.A:
@@ -56,13 +29,20 @@ const ProductDetailInfo = () => {
               phố 4, thị trấn Đức Hòa, huyện Đức Hòa, tỉnh Long An.
             </p>
             <p>
-              <span className="font-bold">Hotline:</span> 0919.93.83.79
+              <span className="font-bold">Hotline:</span> {" "}
+              <a href="tel:0987654321">0987 654 321</a>
             </p>
+            {/* <p><span className="font-bold">Facebook:</span> </p> */}
             <p>
-              <span className="font-bold">Facebook:</span> An Vo Ve Tới chơi
-            </p>
-            <p>
-              <span className="font-bold">Zalo:</span>  An Vo
+              <span className="font-bold">Zalo:</span>{" "}
+              <a
+                className="text-primary underline"
+                href="https://zalo.me/0909786090"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Rượu Cam Giá
+              </a>
             </p>
           </div>
         </div>

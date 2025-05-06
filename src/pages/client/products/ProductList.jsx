@@ -10,9 +10,11 @@ const ProductList = () => {
   const [productFilter, setProductFilter] = useState(products);
   useEffect(() => {
     setProductFilter(
-      products.filter(
-        (product) => product.status === "active" && product.deleted === false,
-      ),
+      products
+        .filter(
+          (product) => product.status === "active" && product.deleted === false,
+        )
+        .sort((a, b) => b.position - a.position),
     );
   }, [products]);
   return (
