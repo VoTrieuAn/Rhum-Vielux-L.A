@@ -3,9 +3,18 @@ import SideBarFilter from "./SideBarFilter";
 import { BiFilterAlt } from "react-icons/bi";
 import Pagination from "@components/Pagination";
 import { useProductContext } from "@context/ProductProvider";
+import { useEffect, useState } from "react";
 
 const ProductList = () => {
   const { products } = useProductContext();
+  const [productFilter, setProductFilter] = useState(products);
+  useEffect(() => {
+    setProductFilter(
+      products.filter(
+        (product) => product.status === "active" && product.deleted === false,
+      ),
+    );
+  }, [products]);
   return (
     <>
       <section className="p-normal">
@@ -22,7 +31,7 @@ const ProductList = () => {
                 <BiFilterAlt className="block md:hidden" />
               </div>
               <div className="mt-10 mb-5 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3 lg:gap-5">
-                {products.map((item) => (
+                {productFilter.map((item) => (
                   <ProductCard
                     key={item.id}
                     id={item.id}

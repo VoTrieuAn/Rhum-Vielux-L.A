@@ -1,82 +1,34 @@
+import Filters from "@components/Filters";
 import { PREFIX_ADMIN } from "@config/system";
 import { useProductContext } from "@context/ProductProvider";
-import { Search, ChevronDown, Plus } from "lucide-react";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { ChevronDown, Plus } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 
 const ProductPage = () => {
-  const [activeTab, setActiveTab] = useState("all");
-
   const { products } = useProductContext();
+  const [searchParams] = useSearchParams();
+  const status = searchParams.get("status");
+  const [productFilter, setProductFilter] = useState(products);
+
+  useEffect(() => {
+    if (status) {
+      setProductFilter(
+        products.filter(
+          (product) => product.status === status && product.deleted === false,
+        ),
+      );
+    } else {
+      setProductFilter(products.filter((product) => product.deleted === false));
+    }
+  }, [status, products]);
 
   return (
     <>
       {/* Main Content */}
       <h1 className="mb-4 text-3xl font-bold">Danh sách sản phẩm</h1>
       {/* Filters */}
-      <div className="mb-6">
-        <div className="mb-2 text-sm text-gray-600">Bộ lọc và tìm kiếm</div>
-        <div className="flex items-center justify-between">
-          <div className="mb-4 flex gap-2">
-            <button
-              className={`cursor-pointer rounded px-3 py-1 text-sm ${activeTab === "all" ? "bg-green-500 text-white" : "border bg-white"}`}
-              onClick={() => setActiveTab("all")}
-            >
-              Tất cả
-            </button>
-            <button
-              className={`cursor-pointer rounded px-3 py-1 text-sm ${activeTab === "active" ? "bg-green-500 text-white" : "border bg-white"}`}
-              onClick={() => setActiveTab("active")}
-            >
-              Hoạt động
-            </button>
-            <button
-              className={`cursor-pointer rounded px-3 py-1 text-sm ${activeTab === "inactive" ? "bg-green-500 text-white" : "border bg-white"}`}
-              onClick={() => setActiveTab("inactive")}
-            >
-              Dừng hoạt động
-            </button>
-          </div>
-
-          {/* Search */}
-          <div className="mb-4 flex gap-3">
-            <div className="relative w-full max-w-md">
-              <input
-                type="text"
-                placeholder="Nhập từ khóa"
-                className="w-full rounded border px-3 py-2 pr-10"
-              />
-              <button className="absolute top-1/2 right-2 -translate-y-1/2 transform text-gray-500">
-                <Search size={18} />
-              </button>
-            </div>
-            <button className="cursor-pointer rounded bg-green-500 px-4 py-2 text-white">
-              Tìm
-            </button>
-          </div>
-        </div>
-
-        {/* Sort */}
-        <div className="mb-4">
-          <div className="mb-2 text-sm text-gray-600">Sắp xếp</div>
-          <div className="flex gap-2">
-            <div className="relative w-64">
-              <select className="w-full appearance-none rounded border bg-white px-3 py-2 pr-10">
-                <option>Vị trí giảm dần</option>
-                <option>Vị trí tăng dần</option>
-                <option>Giá tăng dần</option>
-                <option>Giá giảm dần</option>
-              </select>
-              <div className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 transform">
-                <ChevronDown size={16} />
-              </div>
-            </div>
-            <button className="rounded bg-red-500 px-3 py-1 text-white">
-              Clear
-            </button>
-          </div>
-        </div>
-      </div>
+      <Filters />
 
       {/* Product List */}
       <div className="mb-4 rounded-md bg-white shadow-sm">
@@ -145,7 +97,7 @@ const ProductPage = () => {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200 bg-white">
-              {products.map((product, index) => (
+              {productFilter.map((product) => (
                 <tr key={product.id} className="hover:bg-gray-50">
                   <td className="px-4 py-3">
                     <input type="checkbox" className="rounded" />
@@ -156,12 +108,12 @@ const ProductPage = () => {
                   <td className="px-4 py-3">
                     <img
                       src={product.image || "/placeholder.svg"}
-                      alt={product.title}
+                      alt={product.name}
                       className="h-16 w-16 object-cover"
                     />
                   </td>
                   <td className="px-4 py-3 text-sm text-gray-900">
-                    {product.title}
+                    {product.name}
                   </td>
                   <td className="px-4 py-3 text-sm text-gray-900">
                     {product.price}
@@ -174,7 +126,9 @@ const ProductPage = () => {
                     />
                   </td>
                   <td className="px-4 py-3 text-sm">
-                    <span className="rounded-full bg-green-100 px-2 py-1 text-xs text-green-800">
+                    <span
+                      className={`rounded-full ${product.status === "active" ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"} px-2 py-1 text-xs`}
+                    >
                       {product.status}
                     </span>
                   </td>

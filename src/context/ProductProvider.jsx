@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-const BookContext = createContext();
+const ProductContext = createContext();
 
 const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
@@ -21,14 +21,14 @@ const ProductProvider = ({ children }) => {
   }, []);
   return (
     <>
-      <BookContext.Provider value={{ products }}>
+      <ProductContext.Provider value={{ products }}>
         {children}
-      </BookContext.Provider>
+      </ProductContext.Provider>
     </>
   );
 };
 export default ProductProvider;
 
 export const useProductContext = () => {
-  return useContext(BookContext);
+  return useContext(ProductContext);
 };
