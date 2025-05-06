@@ -47,7 +47,7 @@ const ProductList = () => {
             </div>
           </div>
         </div>
-        <Pagination />
+        {/* <Pagination /> */}
       </section>
     </>
   );

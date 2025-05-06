@@ -7,6 +7,7 @@ import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useRef } from "react";
 import { draggableModal } from "@libs/sweet-alert";
+import { PREFIX_ADMIN } from "@config/system";
 const Header = () => {
   const { pathname } = useLocation();
   const ref = useRef("");
@@ -73,7 +74,7 @@ const Header = () => {
             </div>
             <div className="text-primary relative flex gap-3.5 text-[32px] sm:text-[35px]">
               <IoIosSearch className="hover:text-secondary inline-block cursor-pointer transition-colors duration-300 lg:hidden" />
-              <Link to="/login">
+              <Link to={`/${PREFIX_ADMIN}/dashboard`}>
                 <FiUser className="hover:text-secondary cursor-pointer transition-colors duration-300" />
               </Link>
               <MdOutlineShoppingCart className="hover:text-secondary cursor-pointer transition-colors duration-300" />
