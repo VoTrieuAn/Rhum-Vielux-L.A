@@ -1,7 +1,7 @@
 import { BiFilterAlt } from "react-icons/bi";
-import FilterList from "./Filter/FilterList";
+import FilterList from "./FilterList";
 
-const SideBarFilter = () => {
+const SideBarFilter = ({ setProductFilter }) => {
   return (
     <>
       <div className="sticky top-[112px] mb-5 w-full flex-wrap items-start justify-between">
@@ -9,7 +9,7 @@ const SideBarFilter = () => {
           <BiFilterAlt />
           <span className="text-primary font-bold">Bộ lọc</span>
         </div>
-        <FilterList />
+        <FilterList setProductFilter={setProductFilter} />
       </div>
     </>
   );

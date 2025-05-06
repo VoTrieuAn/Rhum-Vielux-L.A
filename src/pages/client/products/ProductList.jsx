@@ -1,22 +1,8 @@
 import ProductCard from "@components/Card/ProductCard";
-import SideBarFilter from "./SideBarFilter";
+import SideBarFilter from "./Filter/SideBarFilter";
 import { BiFilterAlt } from "react-icons/bi";
-import Pagination from "@components/Pagination";
-import { useProductContext } from "@context/ProductProvider";
-import { useEffect, useState } from "react";
 
-const ProductList = () => {
-  const { products } = useProductContext();
-  const [productFilter, setProductFilter] = useState(products);
-  useEffect(() => {
-    setProductFilter(
-      products
-        .filter(
-          (product) => product.status === "active" && product.deleted === false,
-        )
-        .sort((a, b) => b.position - a.position),
-    );
-  }, [products]);
+const ProductList = ({ products, setProductFilter }) => {
   return (
     <>
       <section className="p-normal">
@@ -24,7 +10,7 @@ const ProductList = () => {
           <div className="flex gap-5">
             {/* Sidebar PC */}
             <div className="hidden md:block md:flex-1">
-              <SideBarFilter />
+              <SideBarFilter setProductFilter={setProductFilter} />
             </div>
             <div className="flex-4">
               <div className="text-primary flex items-center justify-between text-2xl">
@@ -33,7 +19,7 @@ const ProductList = () => {
                 <BiFilterAlt className="block md:hidden" />
               </div>
               <div className="mt-10 mb-5 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3 lg:gap-5">
-                {productFilter.map((item) => (
+                {products.map((item) => (
                   <ProductCard
                     key={item.id}
                     id={item.id}

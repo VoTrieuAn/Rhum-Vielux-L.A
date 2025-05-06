@@ -3,6 +3,8 @@ import { PRODUCT_DETAILS } from "@libs/constant";
 const ProductDetailMain = ({ product }) => {
   return (
     <>
+      <h1 className="mb-4 text-3xl font-bold">Chi tiết sản phẩm</h1>
+
       <section className="p-normal rounded-[20px] border border-[#EBEEEF]">
         <div className="container">
           <div className="grid grid-cols-1 justify-between gap-8 lg:grid-cols-2">

@@ -111,36 +111,6 @@ export const PRODUCT_DETAILS = [
   { label: "Nồng độ", value: "≥ 26%" },
 ];
 
-export const FILTER_ITEMS = [
-  {
-    id: 1,
-    title: "Nồng độ",
-    valueFilter: [
-      { id: "lt-30", name: "Dưới 30%" },
-      { id: "30-40", name: "Từ 30% - 40%" },
-      { id: "gt-40", name: "Trên 40%" },
-    ],
-  },
-  {
-    id: 2,
-    title: "Dung tích",
-    valueFilter: [
-      { id: "300", name: "300 ml" },
-      { id: "500", name: "500 ml" },
-      { id: "700", name: "750 ml" },
-    ],
-  },
-  {
-    id: 3,
-    title: "Giá",
-    valueFilter: [
-      { id: "200", name: "Dưới 200.000đ" },
-      { id: "200-500", name: "200.000đ – 500.000đ" },
-      { id: "500-1000", name: "500.000đ – 1.000.000đ" },
-    ],
-  },
-];
-
 export const PACKAGE_PRODUCT = [
   "1 chai",
   "Thùng 6 chai",
