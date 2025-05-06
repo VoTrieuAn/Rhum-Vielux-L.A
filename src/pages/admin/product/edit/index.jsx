@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 
 const ProductEditPage = () => {
   const { id } = useParams();
-  const { products, setProducts } = useProductContext();
+  const { products, setProducts, loading, setLoading } = useProductContext();
   const product = products.find((item) => item.id === id);
   const [title, setTitle] = useState(product?.name || "");
   const [description, setDescription] = useState(product?.description || "");
@@ -78,6 +78,8 @@ const ProductEditPage = () => {
         deleted: false,
       };
 
+      console.log(productData);
+
       // Dùng PUT hoặc PATCH thay vì POST để cập nhật
       const saveRes = await fetch(
         `${import.meta.env.VITE_API_URL}/products/${id}`,
@@ -93,11 +95,7 @@ const ProductEditPage = () => {
         return;
       }
 
-      setProducts((prevProducts) =>
-        prevProducts.map((item) =>
-          item.id === id ? { ...item, ...productData } : item,
-        ),
-      );
+      setLoading(!loading);
       draggableModal("Cập nhật sản phẩm thành công", "success");
     } catch (err) {
       draggableModal("Có lỗi xảy ra", "error");

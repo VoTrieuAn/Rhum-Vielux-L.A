@@ -2,8 +2,10 @@ import { useState, useRef } from "react";
 import MyEditor from "@utils/MyEditor";
 import { draggableModal } from "@libs/sweet-alert";
 import { normalized } from "@libs/slug";
+import { useProductContext } from "@context/ProductProvider";
 
 const ProductCreatePage = () => {
+  const { loading, setLoading } = useProductContext();
   const [title, setTitle] = useState("");
   // const [category, setCategory] = useState("");
   // const [isFeatured, setIsFeatured] = useState(false);
@@ -89,6 +91,8 @@ const ProductCreatePage = () => {
       }
 
       draggableModal("Lưu sản phẩm thành công", "success");
+
+      setLoading(!loading);
     } catch (err) {
       draggableModal("Có lỗi xảy ra", "error");
     }

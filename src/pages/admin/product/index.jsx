@@ -175,7 +175,7 @@ const ProductPage = () => {
         </div>
 
         {/* Pagination */}
-        <div className="flex items-center justify-between border-t p-4">
+        {/* <div className="flex items-center justify-between border-t p-4">
           <div className="text-sm text-gray-700">Trang</div>
           <div className="flex gap-1">
             <button className="rounded border bg-blue-500 px-3 py-1 text-white">
@@ -191,7 +191,7 @@ const ProductPage = () => {
               Cuối
             </button>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );

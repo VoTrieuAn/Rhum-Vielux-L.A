@@ -4,7 +4,7 @@ const ProductContext = createContext();
 
 const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     try {
       const fetchProducts = async () => {
@@ -18,10 +18,12 @@ const ProductProvider = ({ children }) => {
     } catch (error) {
       console.error("Error fetching products:", error);
     }
-  }, []);
+  }, [loading]);
   return (
     <>
-      <ProductContext.Provider value={{ products, setProducts }}>
+      <ProductContext.Provider
+        value={{ products, setProducts, loading, setLoading }}
+      >
         {children}
       </ProductContext.Provider>
     </>

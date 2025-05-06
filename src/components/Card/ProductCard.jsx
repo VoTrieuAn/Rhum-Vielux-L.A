@@ -27,7 +27,7 @@ const ProductCard = ({ id, name, origin, volume, alcohol, price, image }) => {
             Nồng độ: <span className="text-[#667479]">≥ {alcohol}%...</span>
           </p>
           <p className="font-normal text-[#E50000]">
-            {price === 0 ? "Liên hệ" : `${price}đ`}
+            {price === 0 ? "Liên hệ" : `${price.toLocaleString("vi-VN")}đ`}
           </p>
         </div>
       </Link>

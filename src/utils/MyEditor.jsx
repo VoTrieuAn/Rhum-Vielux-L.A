@@ -1,6 +1,9 @@
 import { Editor } from "@tinymce/tinymce-react";
 
-const MyEditor = ({ value = "", editorRef }) => {
+const MyEditor = ({
+  value = '<h4 class="text-secondary font-bold capitalize">Th&agrave;nh phần:</h4>\n<h4 class="text-secondary font-bold capitalize">Bảo quản / Lưu &yacute;:</h4>\n<h4 class="text-secondary font-bold capitalize">C&aacute;ch sử dụng:</h4>',
+  editorRef,
+}) => {
   return (
     <>
       <Editor
