@@ -78,7 +78,7 @@ const ProductDetailMain = () => {
                     </div>
                   </div>
                 </div>
-                <div className="mt-4 grid grid-cols-3 items-center gap-2 px-0 text-[14px] lg:px-3">
+                {/* <div className="mt-4 grid grid-cols-3 items-center gap-2 px-0 text-[14px] lg:px-3">
                   <div className="text-error-300 font font-medium">
                     Chon loại hàng:
                   </div>
@@ -95,7 +95,7 @@ const ProductDetailMain = () => {
                       ))}
                     </div>
                   </div>
-                </div>
+                </div> */}
                 <div className="mt-4 grid grid-cols-3 items-center gap-2 px-0 text-[14px] lg:px-3">
                   <div className="text-error-300 font font-medium">
                     Số lượng:
@@ -116,7 +116,9 @@ const ProductDetailMain = () => {
                         +
                       </button>
                     </div>
-                    <div className="lg:flex-1">10 sản phẩm có sẵn</div>
+                    <div className="lg:flex-1">
+                      {product.stock} sản phẩm có sẵn
+                    </div>
                   </div>
                 </div>
                 <div className="mt-4 grid grid-cols-1 items-center gap-3 text-[14px] lg:grid-cols-2 lg:gap-5">

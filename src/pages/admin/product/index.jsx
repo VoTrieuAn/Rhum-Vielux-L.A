@@ -19,19 +19,29 @@ const ProductPage = () => {
   useEffect(() => {
     if (status) {
       setProductFilter(
-        products.filter(
-          (product) => product.status === status && product.deleted === false,
-        ),
+        products
+          .filter(
+            (product) => product.status === status && product.deleted === false,
+          )
+          .sort((a, b) => b.position - a.position),
       );
     } else {
-      setProductFilter(products.filter((product) => product.deleted === false));
+      setProductFilter(
+        products
+          .filter((product) => product.deleted === false)
+          .sort((a, b) => b.position - a.position),
+      );
     }
 
     if (keyword) {
       setProductFilter((prev) =>
-        prev.filter((product) => product.slug.includes(keyword)),
+        prev
+          .filter((product) => product.slug.includes(keyword))
+          .sort((a, b) => b.position - a.position),
       );
     }
+
+    // productFilter = productFilter.sort((a, b) => b.position - a.position);
   }, [status, keyword, products]);
 
   const toggleCheck = (id) => {
@@ -53,7 +63,7 @@ const ProductPage = () => {
       {/* Main Content */}
       <h1 className="mb-4 text-3xl font-bold">Danh sách sản phẩm</h1>
       {/* Filters */}
-      <Filters />
+      <Filters product={productFilter} setProduct={setProductFilter} />
 
       {/* Product List */}
       <div className="mb-4 rounded-md bg-white shadow-sm">

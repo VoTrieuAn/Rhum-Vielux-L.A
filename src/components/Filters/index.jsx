@@ -2,7 +2,7 @@ import State from "./State";
 import SearchFilter from "./SearchFilter";
 import SortFilter from "./SortFilter";
 
-const Filters = () => {
+const Filters = ({ product, setProduct }) => {
   return (
     <div className="mb-6">
       <div className="mb-2 text-sm text-gray-600">Bộ lọc và tìm kiếm</div>
@@ -12,7 +12,7 @@ const Filters = () => {
         <SearchFilter />
       </div>
       {/* Sort */}
-      <SortFilter />
+      <SortFilter product={product} setProduct={setProduct} />
     </div>
   );
 };
