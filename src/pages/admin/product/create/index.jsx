@@ -1,19 +1,19 @@
 import { useState, useRef } from "react";
-import { ChevronDown } from "lucide-react";
 import MyEditor from "@utils/MyEditor";
+import { draggableModal } from "@libs/sweet-alert";
 
 const ProductCreatePage = () => {
   const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("");
-  const [isFeatured, setIsFeatured] = useState(false);
+  // const [category, setCategory] = useState("");
+  // const [isFeatured, setIsFeatured] = useState(false);
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
-  const [discount, setDiscount] = useState(0);
-  const [quantity, setQuantity] = useState(0);
+  const [alcohol, setAlcohol] = useState(0);
+  const [stock, setStock] = useState(0);
   const [position, setPosition] = useState("");
   const [isActive, setIsActive] = useState(true);
   const [selectedFile, setSelectedFile] = useState(null);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const fileInputRef = useRef(null);
 
   const editorRef = useRef(null);
@@ -34,21 +34,65 @@ const ProductCreatePage = () => {
     fileInputRef.current?.click();
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log({
-      title,
-      category,
-      isFeatured,
-      description,
-      price,
-      discount,
-      quantity,
-      position,
-      isActive,
-      selectedFile,
-    });
+
+    if (!selectedFile) {
+      draggableModal("Vui lòng chọn ảnh", "warning");
+      return;
+    }
+
+    try {
+      const uploadUrl = `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/upload`;
+      const formData = new FormData();
+      formData.append("file", selectedFile);
+      formData.append(
+        "upload_preset",
+        import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET,
+      );
+
+      const uploadRes = await fetch(uploadUrl, {
+        method: "POST",
+        body: formData,
+      });
+
+      const uploadData = await uploadRes.json();
+      // console.log("Upload thành công:", uploadData);
+
+      const imageUrl = uploadData.secure_url;
+
+      const productData = {
+        name: title,
+        description,
+        origin: "Việt Nam",
+        price,
+        alcohol,
+        stock,
+        image: imageUrl,
+        position,
+        status: isActive ? "active" : "inactive",
+        deleted: false,
+      };
+
+      const saveRes = await fetch(
+        "https://680cbacf2ea307e081d4de69.mockapi.io/api/v1/products",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(productData),
+        },
+      );
+
+      if (!saveRes.ok) {
+        draggableModal("Lưu sản phẩm thất bại", "error");
+      }
+
+      draggableModal("Lưu sản phẩm thành công", "success");
+    } catch (err) {
+      draggableModal("Có lỗi xảy ra", "error");
+    }
   };
 
   return (
@@ -72,7 +116,7 @@ const ProductCreatePage = () => {
           </div>
 
           {/* Category */}
-          <div>
+          {/* <div>
             <label
               htmlFor="category"
               className="mb-1 block text-sm font-medium"
@@ -125,10 +169,10 @@ const ProductCreatePage = () => {
                 </div>
               )}
             </div>
-          </div>
+          </div> */}
 
           {/* Featured */}
-          <div>
+          {/* <div>
             <div className="flex items-center gap-4">
               <div className="flex items-center">
                 <input
@@ -157,7 +201,7 @@ const ProductCreatePage = () => {
                 </label>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Description */}
           <div>
@@ -178,41 +222,35 @@ const ProductCreatePage = () => {
               type="number"
               id="price"
               value={price}
-              onChange={(e) => setPrice(Number(e.target.value))}
+              onChange={(e) => setPrice(e.target.value)}
               className="w-full rounded border border-gray-300 px-3 py-2 focus:ring-1 focus:ring-blue-500 focus:outline-none"
             />
           </div>
 
-          {/* Discount */}
+          {/* Alcohol */}
           <div>
-            <label
-              htmlFor="discount"
-              className="mb-1 block text-sm font-medium"
-            >
-              Giảm giá
+            <label htmlFor="alcohol" className="mb-1 block text-sm font-medium">
+              Nồng độ
             </label>
             <input
               type="number"
-              id="discount"
-              value={discount}
-              onChange={(e) => setDiscount(Number(e.target.value))}
+              id="alcohol"
+              value={alcohol}
+              onChange={(e) => setAlcohol(e.target.value)}
               className="w-full rounded border border-gray-300 px-3 py-2 focus:ring-1 focus:ring-blue-500 focus:outline-none"
             />
           </div>
 
           {/* Quantity */}
           <div>
-            <label
-              htmlFor="quantity"
-              className="mb-1 block text-sm font-medium"
-            >
+            <label htmlFor="stock" className="mb-1 block text-sm font-medium">
               Số lượng
             </label>
             <input
               type="number"
-              id="quantity"
-              value={quantity}
-              onChange={(e) => setQuantity(Number(e.target.value))}
+              id="stock"
+              value={stock}
+              onChange={(e) => setStock(e.target.value)}
               className="w-full rounded border border-gray-300 px-3 py-2 focus:ring-1 focus:ring-blue-500 focus:outline-none"
             />
           </div>
@@ -241,6 +279,17 @@ const ProductCreatePage = () => {
                 accept="image/*"
               />
             </div>
+            {selectedFile && (
+              <div className="mt-2 inline-flex h-25 w-auto overflow-hidden">
+                <img
+                  src={selectedFile ? URL.createObjectURL(selectedFile) : ""}
+                  alt={title}
+                  className="h-full w-full object-contain"
+                />
+              </div>
+            )}
+
+            {/* <UploadWidget /> */}
           </div>
 
           {/* Position */}

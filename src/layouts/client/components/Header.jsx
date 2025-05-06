@@ -6,17 +6,14 @@ import { MENU_CLIENT } from "@libs/constant";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useRef } from "react";
+import { draggableModal } from "@libs/sweet-alert";
 const Header = () => {
   const { pathname } = useLocation();
   const ref = useRef("");
   const navigate = useNavigate();
 
   if (pathname === "/about" || pathname === "/login") {
-    Swal.fire({
-      title: "Trang chưa sẵn sàng",
-      icon: "warning",
-      draggable: true,
-    });
+    draggableModal("Trang chưa sẵn sàng", "warning");
     return <Navigate to={"/"} replace={true} />;
   }
 
