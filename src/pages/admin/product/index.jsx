@@ -1,3 +1,4 @@
+import Action from "@components/Actions";
 import Filters from "@components/Filters";
 import { PREFIX_ADMIN } from "@config/system";
 import { useProductContext } from "@context/ProductProvider";
@@ -9,8 +10,8 @@ const ProductPage = () => {
   const { products } = useProductContext();
   const [searchParams] = useSearchParams();
   const [productFilter, setProductFilter] = useState(products);
-  const status = searchParams.get("status");
-  const keyword = searchParams.get("keyword");
+  const status = searchParams.get("status") || "";
+  const keyword = searchParams.get("keyword") || "";
 
   useEffect(() => {
     if (status) {
@@ -104,13 +105,13 @@ const ProductPage = () => {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200 bg-white">
-              {productFilter.map((product) => (
+              {productFilter.map((product, index) => (
                 <tr key={product.id} className="hover:bg-gray-50">
                   <td className="px-4 py-3">
                     <input type="checkbox" className="rounded" />
                   </td>
                   <td className="px-4 py-3 text-sm text-gray-900">
-                    {product.id}
+                    {index + 1}
                   </td>
                   <td className="px-4 py-3">
                     <img
@@ -144,17 +145,7 @@ const ProductPage = () => {
                   </td>
 
                   <td className="px-4 py-3 text-sm text-gray-900">
-                    <div className="flex gap-1">
-                      <button className="rounded bg-gray-600 px-2 py-1 text-xs text-white">
-                        Chi tiết
-                      </button>
-                      <button className="rounded bg-yellow-500 px-2 py-1 text-xs text-white">
-                        Sửa
-                      </button>
-                      <button className="rounded bg-red-500 px-2 py-1 text-xs text-white">
-                        Xóa
-                      </button>
-                    </div>
+                    <Action id={product.id} />
                   </td>
                 </tr>
               ))}
