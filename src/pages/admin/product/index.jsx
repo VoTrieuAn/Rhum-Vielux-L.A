@@ -4,8 +4,8 @@ import SelectAction from "@components/Actions/SelectAction";
 import Filters from "@components/Filters";
 import { PREFIX_ADMIN } from "@config/system";
 import { useProductContext } from "@context/ProductProvider";
-import { ChevronDown, Plus } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { Plus } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 
 const ProductPage = () => {
@@ -42,7 +42,7 @@ const ProductPage = () => {
 
   const handleCheckAll = (checked) => {
     if (checked) {
-      setCheckedIds(products.map((product) => product.id)); // hoặc mảng id động từ API
+      setCheckedIds(productFilter.map((product) => product.id)); // hoặc mảng id động từ API
     } else {
       setCheckedIds([]);
     }
@@ -63,10 +63,7 @@ const ProductPage = () => {
 
         <div className="flex items-center justify-between p-4">
           <div className="flex items-center gap-2">
-            <SelectAction />
-            <button className="cursor-pointer rounded bg-blue-500 px-3 py-1 text-sm text-white">
-              Áp dụng
-            </button>
+            <SelectAction ids={checkedIds} setIds={setCheckedIds} />
           </div>
           <Link
             to={`/${PREFIX_ADMIN}/products/create`}
@@ -125,7 +122,6 @@ const ProductPage = () => {
                       type="checkbox"
                       className="rounded"
                       checked={checkedIds.includes(product.id)}
-                      // ref={(el) => (checkboxesRef.current[index] = el)}
                       onChange={() => toggleCheck(product.id)}
                     />
                   </td>

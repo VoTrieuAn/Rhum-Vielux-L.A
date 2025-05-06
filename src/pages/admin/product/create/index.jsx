@@ -76,16 +76,13 @@ const ProductCreatePage = () => {
         deleted: false,
       };
 
-      const saveRes = await fetch(
-        "https://680cbacf2ea307e081d4de69.mockapi.io/api/v1/products",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(productData),
+      const saveRes = await fetch(`${import.meta.env.VITE_API_URL}/products`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+        body: JSON.stringify(productData),
+      });
 
       if (!saveRes.ok) {
         draggableModal("Lưu sản phẩm thất bại", "error");

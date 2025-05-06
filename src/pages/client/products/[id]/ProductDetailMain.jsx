@@ -13,7 +13,7 @@ const ProductDetailMain = () => {
     const fetchProductDetails = async () => {
       try {
         const response = await fetch(
-          `https://680cbacf2ea307e081d4de69.mockapi.io/api/v1/products/${id}`,
+          `${import.meta.env.VITE_API_URL}/products/${id}`,
         );
         if (!response.ok) {
           throw new Error("Network response was not ok");

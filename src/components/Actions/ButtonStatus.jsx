@@ -16,8 +16,9 @@ const ButtonStatus = ({ id, status }) => {
         ...product,
         status: status === "active" ? "inactive" : "active",
       };
+      console.log();
       const saveRes = await fetch(
-        `https://680cbacf2ea307e081d4de69.mockapi.io/api/v1/products/${id}`,
+        `${import.meta.env.VITE_API_URL}/products/${id}`,
         {
           method: "PUT",
           headers: {

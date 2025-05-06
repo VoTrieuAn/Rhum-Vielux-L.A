@@ -9,7 +9,7 @@ const ProductProvider = ({ children }) => {
     try {
       const fetchProducts = async () => {
         const response = await fetch(
-          "https://680cbacf2ea307e081d4de69.mockapi.io/api/v1/products",
+          import.meta.env.VITE_API_URL + "/products",
         );
         const data = await response.json();
         setProducts(data);
